@@ -1,8 +1,12 @@
 .leftBar {
     width: 180px;
+    height: 100%;
+    margin-top: 45px;
+    position: sticky;
+    top: 0;
 }
 
-.text{
+.text {
     font-size: 18px;
 }
 
@@ -30,8 +34,16 @@
     height: 35px;
     width: 35px;
 }
+.twitter:hover{
+    background-color: transparent;
+}
 
-.tweetBtn{
+.twitter_logo img{
+    height: 45px;
+    width: 45px;
+}
+
+.tweetBtn {
     background-color: #1d9bf0;
     border-radius: 9999px;
     padding: 12px 70px;

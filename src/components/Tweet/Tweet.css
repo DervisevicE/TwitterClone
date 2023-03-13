@@ -1,0 +1,28 @@
+.tweet {
+    display: block;
+    justify-content: center;
+    width: 610px;
+    margin: 52px;
+    align-items: flex-start;
+    border-bottom: 1.5px solid rgb(222, 213, 213);
+}
+
+.user_details {
+    display: flex;
+}
+
+.username, .username_bold {
+    display: inline-block;
+    align-items: flex-end;
+    margin: 30px 0px;
+    margin-left: 8px;
+}
+
+.username_bold {
+    font-weight: bold;
+}
+
+.content {
+    margin: 0px 70px;
+    margin-bottom: 20px;
+}
