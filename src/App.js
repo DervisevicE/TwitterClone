@@ -1,9 +1,10 @@
 import './App.css';
+import LeftBar from './components/LeftBar/LeftBar';
 
 function App() {
   return (
     <div className="App">
-      <p>Learn React</p>
+      <LeftBar/>
     </div>
   );
 }

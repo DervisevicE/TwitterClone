@@ -1,0 +1,43 @@
+.leftBar {
+    width: 180px;
+}
+
+.text{
+    font-size: 18px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    justify-content: flex-start;
+}
+
+.item:hover {
+    background-color: #ebebeb;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 50px;
+    height: 45px;
+    margin-right: 8px;
+}
+
+.icon img {
+    height: 35px;
+    width: 35px;
+}
+
+.tweetBtn{
+    background-color: #1d9bf0;
+    border-radius: 9999px;
+    padding: 12px 70px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+}
