@@ -1,11 +1,11 @@
-.right_bar{
-    width: 250px;
+.right_bar {
+    width: fit-content;
     height: 100%;
     position: sticky;
     top: 0;
 }
 
-.search_bar{
+.search_bar {
     display: flex;
     align-items: center;
     padding: 0px 15px;
@@ -14,15 +14,26 @@
     border-radius: 30px;
 }
 
-.search_bar img{
+.search_bar img {
     width: 30px;
     height: 30px;
 }
 
-.search_bar .search_fld{
+.search_bar .search_fld {
     border: none;
     width: 280px;
     height: 40px;
     border-radius: 30px;
     background-color: #ebebeb;
+    margin: 0px 12px;
+}
+
+.suggestions_list {
+    background-color: #ebebeb;
+    margin-top: 42px;
+}
+
+.suggestions_list h2 {
+    padding: 12px 16px;
+    margin: 28px 6px;
 }

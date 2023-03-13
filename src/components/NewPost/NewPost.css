@@ -1,4 +1,4 @@
-.newPost {
+.new_post {
     display: flex;
     justify-content: center;
     width: fit-content;
@@ -7,13 +7,13 @@
     align-items: flex-start;
 }
 
-.newPost form {
+.new_post form {
     display: flex;
     align-items: flex-end;
     margin: 10px 10px;
 }
 
-.newPostText {
+.new_post_text {
     height: 150px;
     width: 400px;
     border: none;
@@ -21,7 +21,7 @@
     padding: 8px;
 }
 
-.newPostTweet {
+.new_post_tweet {
     background-color: #1d9bf0;
     border-radius: 9999px;
     padding: 8px 16px;

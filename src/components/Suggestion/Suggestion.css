@@ -1,0 +1,41 @@
+.suggestion {
+    width: fit-content;
+    background-color: #ebebeb;
+    padding: 12px 16px;
+    margin: 28px 0px;
+    display: block;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.name_bold {
+    font-weight: bold;
+}
+
+.details {
+    display: inline-flex;
+}
+
+.names {
+    margin-left: 12px;
+    display: inline-block;
+    margin: 10px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.follow_btn {
+    background-color: #090d0f;
+    border-radius: 9999px;
+    padding: 12px 45px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: auto;
+    display: inline-block;
+}

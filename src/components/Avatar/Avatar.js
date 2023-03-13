@@ -5,7 +5,7 @@ import avatar from './avatar.jpg'
 const Avatar = () => {
     return(
         <div className="avatar">
-            <img className="avatarImg" src={avatar} alt="avatar"/>
+            <img className="avatar_img" src={avatar} alt="avatar"/>
         </div>
     );
 }
