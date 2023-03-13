@@ -26,3 +26,23 @@
     margin: 0px 70px;
     margin-bottom: 20px;
 }
+
+.interactions{
+    margin: 0px 70px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.interactions img{
+    width: 25px;
+    height: 25px;
+    margin: 4px 60px;
+}
+
+.interactions img:hover{
+    background-color: #1d9cf07e;
+    border-radius: 9999px;
+    padding: 4px;
+    cursor: pointer;
+}

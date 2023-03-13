@@ -1,6 +1,9 @@
 import React from "react";
 import Avatar from "../Avatar/Avatar";
 import './Tweet.css'
+import like from './like.png';
+import comment from './comment.png';
+import repost from './repost.png';
 
 
 const Tweet = () => {
@@ -21,6 +24,11 @@ const Tweet = () => {
                 libero vitae, ultricies arcu. Integer maximus risus ac odio scelerisque, non
                 aliquet felis venenatis.
             </p>
+            <div className="interactions">
+                <img src={like} alt="like"/>
+                <img src={comment} alt="comment"/>
+                <img src={repost} alt="repost"/>
+            </div>
         </div>
     );
 };
