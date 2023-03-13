@@ -1,0 +1,35 @@
+.newPost {
+    display: flex;
+    justify-content: center;
+    width: 850px;
+    margin: 52px;
+    border-bottom: 1.5px solid rgb(222, 213, 213);
+    align-items: flex-start;
+}
+
+.newPost form {
+    display: flex;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+
+.newPostText {
+    height: 150px;
+    width: 400px;
+    border: none;
+    border: 1.5px solid  rgb(222, 213, 213);
+    padding: 8px;
+}
+
+.newPostTweet {
+    background-color: #1d9bf0;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    margin-left: 8px;
+    vertical-align: top;
+}
