@@ -1,7 +1,6 @@
 import React from "react";
 import NewPost from "../NewPost/NewPost";
 import Tweet from "../Tweet/Tweet";
-import './Feed.css';
 
 
 const Feed = () => {
