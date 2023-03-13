@@ -1,0 +1,28 @@
+.right_bar{
+    width: 250px;
+    height: 100%;
+    position: sticky;
+    top: 0;
+}
+
+.search_bar{
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+    justify-content: flex-start;
+    background-color: #ebebeb;
+    border-radius: 30px;
+}
+
+.search_bar img{
+    width: 30px;
+    height: 30px;
+}
+
+.search_bar .search_fld{
+    border: none;
+    width: 280px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: #ebebeb;
+}

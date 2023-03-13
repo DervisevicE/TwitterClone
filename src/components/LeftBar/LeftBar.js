@@ -9,7 +9,7 @@ import twitterIcon from './twitterIcon.png'
 
 const LeftBar = () => {
     return (
-        <div className="leftBar">
+        <div className="left_bar">
             <div className="item twitter">
                 <div className="icon twitter_logo"> <img src={twitterIcon} alt="icon" /></div>
             </div>
