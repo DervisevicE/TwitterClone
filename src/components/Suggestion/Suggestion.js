@@ -15,23 +15,6 @@ const Suggestion = (props) => {
             </div>
             <button className="follow_btn">Follow</button>
         </div>
-
-
-
-
-        // <div className="suggestion">
-        //     <div className="details">
-        //         <div className="container">
-        //             <Avatar />
-        //             <div className="names">
-        //                 <div className="name_bold">{props.tweet.user}</div>
-        //                 <div className="name">{props.tweet.username}</div>
-        //             </div>
-        //             <button className="follow_btn">Follow</button>
-        //         </div>
-        //     </div>
-        // </div>
-
     );
 }
 
