@@ -3,13 +3,13 @@ import NewPost from "../NewPost/NewPost";
 import Tweet from "../Tweet/Tweet";
 
 
-const Feed = () => {
-    return(
+const Feed = (props) => {
+    return (
         <div className="feed">
-            <NewPost/>
-            <Tweet/>
-            <Tweet/>
-            <Tweet/>
+            <NewPost />
+            {props.tweets.map((tweet) => (
+                <Tweet key={tweet.id} tweet={tweet} />
+            ))}
         </div>
     );
 }

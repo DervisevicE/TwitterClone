@@ -1,31 +1,30 @@
 .suggestion {
-    width: fit-content;
+    width: auto;
     background-color: #ebebeb;
     padding: 12px 16px;
     margin: 28px 0px;
-    display: block;
-    justify-content: center;
-    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
 
 .name_bold {
     font-weight: bold;
 }
 
 .details {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .names {
-    margin-left: 12px;
-    display: inline-block;
-    margin: 10px;
+    padding-left: 12px;
+    padding: 10px;
+    margin: auto;
 }
 
-.container {
-    display: flex;
-    align-items: center;
-}
 
 .follow_btn {
     background-color: #090d0f;
@@ -36,6 +35,6 @@
     color: white;
     font-weight: bold;
     font-size: 14px;
-    margin-left: auto;
-    display: inline-block;
+
+
 }

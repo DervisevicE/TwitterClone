@@ -6,28 +6,20 @@ import comment from './comment.png';
 import repost from './repost.png';
 
 
-const Tweet = () => {
+const Tweet = (props) => {
     return (
         <div className="tweet">
             <div className="user_details">
                 <Avatar />
-                <p className="username_bold">Username Lastaname</p>
-                <p className="username">@username.test</p>
+                <p className="username_bold">{props.tweet.user}</p>
+                <p className="username">{props.tweet.username}</p>
             </div>
-            <p className="content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum vel est venenatis, posuere libero eget, commodo sapien.
-                Vestibulum pretium nulla at quam facilisis, id dignissim nibh ultricies.
-                Nam ut ex vitae massa porttitor faucibus nec quis odio.
-                Vivamus egestas aliquam eros ac varius. Sed eu interdum purus, ac iaculis arcu.
-                Nulla feugiat ante at massa iaculis blandit. Nunc commodo purus viverra tellus
-                laoreet, eget gravida urna blandit. Sed vitae justo pellentesque, bibendum
-                libero vitae, ultricies arcu. Integer maximus risus ac odio scelerisque, non
-                aliquet felis venenatis.
+            <p className="content"> {props.tweet.content}
             </p>
             <div className="interactions">
-                <img src={like} alt="like"/>
-                <img src={comment} alt="comment"/>
-                <img src={repost} alt="repost"/>
+                <div><img src={like} alt="like" /></div>
+                <div><img src={comment} alt="comment" /></div>
+                <div><img src={repost} alt="repost" /></div>
             </div>
         </div>
     );

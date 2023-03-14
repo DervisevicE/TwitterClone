@@ -1,7 +1,6 @@
 .left_bar {
     width: 250px;
     height: 100%;
-    margin-top: 45px;
     margin-left: auto;
     position: sticky;
     top: 0;
@@ -16,30 +15,35 @@
     align-items: center;
     padding: 8px;
     justify-content: flex-start;
+    margin-bottom: 10px;
 }
 
 .item:hover {
     background-color: #ebebeb;
     border-radius: 30px;
     cursor: pointer;
-    margin-bottom: 10px;
+
 }
 
 .icon {
     width: 50px;
     height: 45px;
     margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon img {
     height: 35px;
     width: 35px;
 }
-.twitter:hover{
+
+.twitter:hover {
     background-color: transparent;
 }
 
-.twitter_logo img{
+.twitter_logo img {
     height: 45px;
     width: 45px;
 }

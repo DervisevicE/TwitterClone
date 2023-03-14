@@ -1,12 +1,11 @@
 import React from "react";
-import Avatar from "../Avatar/Avatar";
 import Suggestion from "../Suggestion/Suggestion";
 import './RightBar.css'
 import search from './search.png'
 
 
 
-const RightBar = () => {
+const RightBar = (props) => {
     return (
         <div className="right_bar">
             <div className="search_bar">
@@ -16,9 +15,9 @@ const RightBar = () => {
 
             <div className="suggestions_list">
                 <h2>Who to follow?</h2>
-                <Suggestion />
-                <Suggestion />
-                <Suggestion />
+                {props.tweets.map((tweet) => (
+                    <Suggestion key={tweet.id} tweet={tweet} />
+                ))}
             </div>
 
         </div>

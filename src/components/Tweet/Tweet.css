@@ -11,7 +11,8 @@
     display: flex;
 }
 
-.username, .username_bold {
+.username,
+.username_bold {
     display: inline-block;
     align-items: flex-end;
     margin: 30px 0px;
@@ -27,22 +28,31 @@
     margin-bottom: 20px;
 }
 
-.interactions{
+.interactions {
     margin: 0px 70px;
     margin-bottom: 20px;
     display: flex;
+    justify-content: space-evenly;
+    padding: 0px 50px;
+}
+
+.interactions div {
+    padding: 2px;
+    width: 30px;
+    height: 30px;
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.interactions img{
-    width: 25px;
-    height: 25px;
-    margin: 4px 60px;
+.interactions>div>img {
+    width: 26px;
+    height: 26px;
+
 }
 
-.interactions img:hover{
+.interactions div:hover {
     background-color: #1d9cf07e;
     border-radius: 9999px;
-    padding: 4px;
     cursor: pointer;
 }

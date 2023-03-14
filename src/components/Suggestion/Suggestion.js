@@ -3,20 +3,34 @@ import Avatar from "../Avatar/Avatar";
 import './Suggestion.css';
 
 
-const Suggestion = () => {
+const Suggestion = (props) => {
     return (
-        <div class="suggestion">
-            <div class="details">
+        <div className="suggestion">
+            <div className="details">
                 <Avatar />
-                <div class="container">
-                    <div class="names">
-                        <div class="name_bold">FirstName LastName</div>
-                        <div class="name">@firstname.lastname</div>
-                    </div>
-                    <button class="follow_btn">Follow</button>
+                <div className="names">
+                    <div className="name_bold">{props.tweet.user}</div>
+                    <div className="name">{props.tweet.username}</div>
                 </div>
             </div>
+            <button className="follow_btn">Follow</button>
         </div>
+
+
+
+
+        // <div className="suggestion">
+        //     <div className="details">
+        //         <div className="container">
+        //             <Avatar />
+        //             <div className="names">
+        //                 <div className="name_bold">{props.tweet.user}</div>
+        //                 <div className="name">{props.tweet.username}</div>
+        //             </div>
+        //             <button className="follow_btn">Follow</button>
+        //         </div>
+        //     </div>
+        // </div>
 
     );
 }

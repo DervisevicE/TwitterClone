@@ -1,0 +1,21 @@
+[
+    {
+        "id" : "1",
+        "user" : "First Last",
+        "username": "@first.last",
+        "content" : "This is my tweet"
+    },
+    {
+        "id" : "2",
+        "user" : "First Second",
+        "username": "@first.second",
+        "content" : "This is my second tweet"
+    },
+    {
+        "id" : "3",
+        "user" : "First Third",
+        "username": "@first.third",
+        "content" : "This is my second tweet"
+    }
+
+]

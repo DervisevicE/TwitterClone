@@ -1,6 +1,7 @@
 .right_bar {
     width: fit-content;
     height: 100%;
+    padding-top: 20px;
     position: sticky;
     top: 0;
 }
@@ -31,6 +32,8 @@
 .suggestions_list {
     background-color: #ebebeb;
     margin-top: 42px;
+    border-radius: 30px;
+    padding: 1px;
 }
 
 .suggestions_list h2 {
