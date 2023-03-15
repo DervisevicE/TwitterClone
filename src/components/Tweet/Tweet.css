@@ -33,7 +33,7 @@
     margin-bottom: 20px;
     display: flex;
     justify-content: space-evenly;
-    padding: 0px 50px;
+    padding: 0px 80px;
 }
 
 .interactions div {
@@ -48,11 +48,18 @@
 .interactions>div>img {
     width: 26px;
     height: 26px;
-
 }
 
 .interactions div:hover {
     background-color: #1d9cf07e;
     border-radius: 9999px;
     cursor: pointer;
+}
+
+.interactions p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0;
+    font-weight: 300;
 }

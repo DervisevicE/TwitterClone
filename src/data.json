@@ -3,19 +3,28 @@
         "id" : "1",
         "user" : "First Last",
         "username": "@first.last",
-        "content" : "This is my tweet"
+        "content" : "This is my tweet",
+        "likes": 125,
+        "comments" : 158,
+        "reposts" : 55
     },
     {
         "id" : "2",
         "user" : "First Second",
         "username": "@first.second",
-        "content" : "This is my second tweet"
+        "content" : "This is my second tweet",
+        "likes": 25,
+        "comments" : 58,
+        "reposts" : 5
     },
     {
         "id" : "3",
         "user" : "First Third",
         "username": "@first.third",
-        "content" : "This is my second tweet"
+        "content" : "This is my second tweet",
+        "likes": 525,
+        "comments" : 258,
+        "reposts" : 4
     }
 
 ]

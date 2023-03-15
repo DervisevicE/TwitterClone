@@ -17,9 +17,9 @@ const Tweet = (props) => {
             <p className="content"> {props.tweet.content}
             </p>
             <div className="interactions">
-                <div><img src={like} alt="like" /></div>
-                <div><img src={comment} alt="comment" /></div>
-                <div><img src={repost} alt="repost" /></div>
+                <div><img src={like} alt="like" /> </div> <p>{props.tweet.likes}</p>
+                <div><img src={comment} alt="comment" /> </div> <p>{props.tweet.comments}</p>
+                <div><img src={repost} alt="repost" /> </div> <p>{props.tweet.reposts}</p>
             </div>
         </div>
     );
