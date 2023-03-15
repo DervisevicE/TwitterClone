@@ -1,8 +1,9 @@
 .tweet {
     display: block;
     justify-content: center;
-    width: 610px;
-    margin: 52px;
+    width: auto;
+    margin: 52px 0px;
+    padding: 0px 52px;
     align-items: flex-start;
     border-bottom: 1.5px solid rgb(222, 213, 213);
 }

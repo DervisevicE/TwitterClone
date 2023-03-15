@@ -1,0 +1,12 @@
+.feed{
+    border-left: 1.5px solid #ebebeb;
+    border-right: 1.5px solid #ebebeb;
+    margin: 0px 28px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.feed h2{
+    padding-left: 52px;
+}
