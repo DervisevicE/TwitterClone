@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import './Tweet.css'
 import like from './like.png';
+import liked from './liked.png';
 import comment from './comment.png';
 import repost from './repost.png';
 
 
 const Tweet = (props) => {
+
+    const [likes, setLikes] = useState(props.tweet.likes);
+    const [isClicked, setIsClicked] = useState(false);
+
+    const updateLikesHandler = () => {
+        setIsClicked(!isClicked);
+        if (!isClicked) {
+            const newLikesNumber = likes + 1;
+            setLikes(newLikesNumber);
+            return;
+        }
+        const newLikesNumber = likes - 1;
+        setLikes(newLikesNumber);
+    }
+
     return (
         <div className="tweet">
             <div className="user_details">
@@ -17,7 +33,7 @@ const Tweet = (props) => {
             <p className="content"> {props.tweet.content}
             </p>
             <div className="interactions">
-                <div><img src={like} alt="like" /> </div> <p>{props.tweet.likes}</p>
+                <div onClick={updateLikesHandler}><img src={isClicked ? liked : like} alt="like" /> </div> <p className={isClicked ? "updated" : ""}>{likes}</p>
                 <div><img src={comment} alt="comment" /> </div> <p>{props.tweet.comments}</p>
                 <div><img src={repost} alt="repost" /> </div> <p>{props.tweet.reposts}</p>
             </div>

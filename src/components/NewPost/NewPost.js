@@ -9,7 +9,7 @@ const NewPost = (props) => {
         event.preventDefault();
 
         const newTweet = {
-            id: "3",
+            id: Math.random().toString(),
             user: "Active User",
             username: "@active.user",
             content: enteredText,
@@ -19,6 +19,7 @@ const NewPost = (props) => {
         };
 
         props.onAddTweet(newTweet);
+        setEnteredText("");
     }
 
     const enteredTextHandler = (event) => {
