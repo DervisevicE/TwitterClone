@@ -58,3 +58,8 @@
     font-weight: bold;
     font-size: 17px;
 }
+
+.router_links{
+    text-decoration: none;
+    color: black;
+}

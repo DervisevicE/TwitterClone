@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './LeftBar.css'
 import home from './home.png'
 import explore from './explore.png'
@@ -10,37 +11,49 @@ import twitterIcon from './twitterIcon.png'
 const LeftBar = () => {
     return (
         <div className="left_bar">
-            <div className="item twitter">
-                <div className="icon twitter_logo"> <img src={twitterIcon} alt="icon" /></div>
-            </div>
+            <Link className="router_links" to='/'>
+                <div className="item twitter">
+                    <div className="icon twitter_logo"> <img src={twitterIcon} alt="icon" /> </div>
+                </div>
+            </Link>
 
-            <div className="item">
-                <div className="icon"> <img src={home} alt="home" /></div>
-                <div className="text"> Home</div>
-            </div>
+            <Link className="router_links" to='/'>
+                <div className="item">
+                    <div className="icon"> <img src={home} alt="home" /></div>
+                    <div className="text"> Home </div>
+                </div>
+            </Link>
 
-            <div className="item">
-                <div className="icon"> <img src={explore} alt="explore" /></div>
-                <div className="text"> Explore</div>
-            </div>
+            <Link className="router_links" to='explore'>
+                <div className="item">
+                    <div className="icon"> <img src={explore} alt="explore" /></div>
+                    <div className="text">Explore </div>
+                </div>
+            </Link>
 
-            <div className="item">
-                <div className="icon"> <img src={bell} alt="bell" /></div>
-                <div className="text"> Notifications</div>
-            </div>
+            <Link className="router_links" to='notifications'>
+                <div className="item">
+                    <div className="icon"> <img src={bell} alt="bell" /></div>
+                    <div className="text">Notifications</div>
+                </div>
+            </Link>
 
-            <div className="item">
-                <div className="icon"> <img src={bookmark} alt="bookmark" /></div>
-                <div className="text"> Bookmarks</div>
-            </div>
+            <Link className="router_links" to='bookmarks'>
+                <div className="item">
+                    <div className="icon"> <img src={bookmark} alt="bookmark" /></div>
+                    <div className="text">Bookmarks </div>
+                </div>
+            </Link>
 
-            <div className="item">
-                <div className="icon"> <img src={profile} alt="profile" /></div>
-                <div className="text"> Profile</div>
-            </div>
+            <Link className="router_links" to='profile'>
+                <div className="item">
+                    <div className="icon"> <img src={profile} alt="profile" /></div>
+                    <div className="text">Profile </div>
+                </div>
+            </Link>
 
             <button className="tweetBtn">Tweet</button>
-        </div>
+        </div >
     );
 };
 
