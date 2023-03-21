@@ -1,8 +1,9 @@
 .right_bar {
-    width: fit-content;
+    width: 25vw;
     height: 100%;
     padding-top: 20px;
     position: sticky;
+    margin-right: 32px;
     top: 0;
 }
 

@@ -1,0 +1,17 @@
+import React from "react";
+import './Notification.css';
+import Avatar from "../Avatar/Avatar";
+
+const Notification = () => {
+    return(
+        <div className="notification">
+                <Avatar />
+                <div className="notification_content">This is content of my notification. Bla bla bla bla bla.
+                    This is content of my notification. Bla bla bla bla bla.
+                    This is content of my notification. Bla bla bla bla bla.
+                    This is content of my notification. Bla bla bla bla bla.</div>
+            </div>
+    );
+}
+
+export default Notification;

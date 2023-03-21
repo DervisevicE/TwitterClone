@@ -1,0 +1,18 @@
+.notifications {
+    border-left: 1.5px solid #f7f9f9;
+    border-right: 1.5px solid #f7f9f9;
+    margin: 0px 28px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+
+}
+
+.notifications h2 {
+    position: sticky;
+    top: 0;
+    background-color: #ffffffed;
+    padding: 28px 0px;
+    padding-left: 52px;
+}

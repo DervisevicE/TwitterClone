@@ -4,6 +4,8 @@ import Feed from './components/Feed/Feed';
 import LeftBar from './components/LeftBar/LeftBar';
 import RightBar from './components/RightBar/RightBar';
 import Explore from './components/Explore/Explore';
+import Notifications from './components/Notifications/Notifications';
+import Bookmarks from './components/Bookmarks/Bookmarks';
 import tweets from './data.json';
 
 function App() {
@@ -15,6 +17,9 @@ function App() {
         <Route path='/' element={<Feed tweets={tweets} />}/>
         <Route path='/home' element={<Feed tweets={tweets} />}/>
         <Route path='/explore' element={<Explore/>}/>
+        <Route path='/notifications' element={<Notifications/>}/>
+        <Route path='/bookmarks' element={<Bookmarks/>}/>
+
       </Routes>
         
       <RightBar tweets={tweets} />

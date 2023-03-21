@@ -1,7 +1,7 @@
 .left_bar {
-    width: 250px;
+    width: 25vw;
     height: 100%;
-    margin-left: auto;
+    margin-left: 32px;
     position: sticky;
     top: 0;
 }
