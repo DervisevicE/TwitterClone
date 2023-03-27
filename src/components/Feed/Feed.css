@@ -1,14 +1,11 @@
 .feed {
-    border-left: 1.5px solid #f7f9f9;
-    border-right: 1.5px solid #f7f9f9;
-    margin: 0px 28px;
     display: block;
     justify-content: center;
     align-items: center;
-    width: 50vw;
+    width: 100%;
 }
 
-.feed h2 {
+.title {
     position: sticky;
     top: 0;
     background-color: #ffffffed;

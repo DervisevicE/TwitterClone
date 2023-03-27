@@ -35,6 +35,8 @@
     color: white;
     font-weight: bold;
     font-size: 14px;
+}
 
-
+.suggestion:hover{
+    background-color: #e7e7e8;
 }

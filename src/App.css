@@ -3,8 +3,8 @@
 } */
 
 
-.App{
-  margin: 0px 45px;
+.App {
+  padding: 0px 45px;
   display: flex;
 }
 
@@ -12,6 +12,18 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+.lefttest,
+.righttest {
+  width: 25%;
+}
+
+.main {
+  width: 50%;
+  border-left: 2px solid #e7e7e8;
+  border-right: 2px solid #e7e7e8;
+}
+
 /*
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -2,10 +2,10 @@
     display: block;
     justify-content: center;
     width: auto;
-    margin: 52px 0px;
-    padding: 0px 52px;
+    padding: 0px 32px;
     align-items: flex-start;
-    border-bottom: 1.5px solid #f7f9f9;
+    border-bottom: 2px solid #e7e7e8;
+    padding-top: 8px;
 }
 
 .user_details {
@@ -14,9 +14,9 @@
 
 .username,
 .username_bold {
-    display: inline-block;
-    align-items: flex-end;
-    margin: 30px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: 8px;
 }
 
@@ -26,12 +26,12 @@
 
 .content {
     margin: 0px 70px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .interactions {
     margin: 0px 70px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-evenly;
     padding: 0px 80px;
@@ -57,14 +57,18 @@
     cursor: pointer;
 }
 
-.interactions p{
+.interactions p {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:0;
+    margin: 0;
     font-weight: 300;
 }
 
-.updated{
+.updated {
     color: #1d9cf0;
+}
+
+.tweet:hover {
+    background-color: #f7f7f7;
 }

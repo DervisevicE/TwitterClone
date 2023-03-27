@@ -1,9 +1,12 @@
 import React from "react";
+import './Explore.css'
+import Notification from '../Notification/Notification'
 
 const Explore = () => {
     return(
         <div className="explore">
-            <h2>Explore</h2>
+            <div className="title"><h2>Explore</h2></div>
+            <Notification/>
         </div>
     );
 }

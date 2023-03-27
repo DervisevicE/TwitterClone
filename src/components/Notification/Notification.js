@@ -3,14 +3,16 @@ import './Notification.css';
 import Avatar from "../Avatar/Avatar";
 
 const Notification = () => {
-    return(
+    return (
         <div className="notification">
-                <Avatar />
-                <div className="notification_content">This is content of my notification. Bla bla bla bla bla.
+            <Avatar />
+            <div className="notification_content">
+                <p>This is content of my notification. Bla bla bla bla bla.
                     This is content of my notification. Bla bla bla bla bla.
                     This is content of my notification. Bla bla bla bla bla.
-                    This is content of my notification. Bla bla bla bla bla.</div>
+                    This is content of my notification. Bla bla bla bla bla.</p>
             </div>
+        </div>
     );
 }
 

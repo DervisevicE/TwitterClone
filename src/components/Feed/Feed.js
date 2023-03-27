@@ -15,7 +15,7 @@ const Feed = (props) => {
     }
     return (
         <div className="feed">
-            <h2>Home</h2>
+            <div className="title"><h2>Home</h2></div>
             <NewPost onAddTweet={addTweetHandler} />
             {allTweets.map((tweet) => (
                 <Tweet key={tweet.id} tweet={tweet} />

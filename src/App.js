@@ -11,18 +11,18 @@ import tweets from './data.json';
 function App() {
   return (
     <div className="App">
-      <LeftBar />
+      <LeftBar className="lefttest" />
 
-      <Routes>
-        <Route path='/' element={<Feed tweets={tweets} />}/>
-        <Route path='/home' element={<Feed tweets={tweets} />}/>
-        <Route path='/explore' element={<Explore/>}/>
-        <Route path='/notifications' element={<Notifications/>}/>
-        <Route path='/bookmarks' element={<Bookmarks/>}/>
-
-      </Routes>
-        
-      <RightBar tweets={tweets} />
+      <div className='main'>
+        <Routes>
+          <Route path='/' element={<Feed tweets={tweets} />} />
+          <Route path='/home' element={<Feed tweets={tweets} />} />
+          <Route path='/explore' element={<Explore />} />
+          <Route path='/notifications' element={<Notifications />} />
+          <Route path='/bookmarks' element={<Bookmarks />} />
+        </Routes>
+      </div>
+      <RightBar className="righttest" tweets={tweets} />
     </div>
   );
 }
