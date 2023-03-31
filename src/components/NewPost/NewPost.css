@@ -10,7 +10,7 @@
 .new_post form {
     display: flex;
     align-items: flex-end;
-    padding: 10px 32px;
+    padding: 10px 42px;
 }
 
 .new_post_text {

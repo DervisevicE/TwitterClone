@@ -1,0 +1,15 @@
+.bookmarks{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    position: sticky;
+    top: 0;
+    background-color: #ffffffed;
+    padding: 28px 0px;
+    padding-left: 42px;
+    border-bottom: 2px solid #f7f7f7; 
+}

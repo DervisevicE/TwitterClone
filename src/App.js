@@ -11,7 +11,7 @@ import tweets from './data.json';
 function App() {
   return (
     <div className="App">
-      <LeftBar className="lefttest" />
+      <LeftBar className="left" />
 
       <div className='main'>
         <Routes>
@@ -22,7 +22,7 @@ function App() {
           <Route path='/bookmarks' element={<Bookmarks />} />
         </Routes>
       </div>
-      <RightBar className="righttest" tweets={tweets} />
+      <RightBar className="right" tweets={tweets} />
     </div>
   );
 }

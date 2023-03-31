@@ -14,7 +14,7 @@ const Feed = (props) => {
         });
     }
     return (
-        <div className="feed">
+        <div className="feed fade-in">
             <div className="title"><h2>Home</h2></div>
             <NewPost onAddTweet={addTweetHandler} />
             {allTweets.map((tweet) => (

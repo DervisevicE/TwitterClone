@@ -1,8 +1,7 @@
 .suggestion {
     width: auto;
     background-color: #f7f9f9;
-    padding: 12px 16px;
-    margin: 28px 0px;
+    padding: 8px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;

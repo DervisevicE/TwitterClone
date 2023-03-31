@@ -13,8 +13,8 @@
   pointer-events: none;
 }
 
-.lefttest,
-.righttest {
+.left,
+.right {
   width: 25%;
 }
 
@@ -22,6 +22,22 @@
   width: 50%;
   border-left: 2px solid #e7e7e8;
   border-right: 2px solid #e7e7e8;
+}
+
+.fade-in {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /*
