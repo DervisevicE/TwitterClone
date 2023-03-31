@@ -7,6 +7,7 @@ import Explore from './components/Explore/Explore';
 import Notifications from './components/Notifications/Notifications';
 import Bookmarks from './components/Bookmarks/Bookmarks';
 import tweets from './data.json';
+import DataProvider from './DataProvider';
 
 function App() {
   return (
@@ -14,13 +15,15 @@ function App() {
       <LeftBar className="left" />
 
       <div className='main'>
-        <Routes>
-          <Route path='/' element={<Feed tweets={tweets} />} />
-          <Route path='/home' element={<Feed tweets={tweets} />} />
-          <Route path='/explore' element={<Explore />} />
-          <Route path='/notifications' element={<Notifications />} />
-          <Route path='/bookmarks' element={<Bookmarks />} />
-        </Routes>
+        <DataProvider>
+          <Routes>
+            <Route path='/' element={<Feed />} />
+            <Route path='/home' element={<Feed />} />
+            <Route path='/explore' element={<Explore />} />
+            <Route path='/notifications' element={<Notifications />} />
+            <Route path='/bookmarks' element={<Bookmarks />} />
+          </Routes>
+        </DataProvider>
       </div>
       <RightBar className="right" tweets={tweets} />
     </div>

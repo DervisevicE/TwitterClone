@@ -7,7 +7,6 @@ const NewPost = (props) => {
 
     const addTweetHandler = (event) => {
         event.preventDefault();
-
         const newTweet = {
             id: Math.random().toString(),
             user: "Active User",
