@@ -1,6 +1,6 @@
 import React from "react";
 import './Avatar.css'
-import avatar from './avatar.jpg'
+import avatar from '../../assets/avatar.jpg';
 
 const Avatar = () => {
     return(

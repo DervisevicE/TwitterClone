@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './LeftBar.css'
-import home from './home.png'
-import explore from './explore.png'
-import bell from './bell.png'
-import bookmark from './bookmark.png'
-import profile from './profile.png'
-import twitterIcon from './twitterIcon.png'
+import home from '../../assets/home.png'
+import explore from '../../assets/explore.png'
+import bell from '../../assets/bell.png'
+import bookmark from '../../assets/bookmark.png'
+import profile from '../../assets/profile.png'
+import twitterIcon from '../../assets/twitterIcon.png'
 
 const LeftBar = () => {
     return (

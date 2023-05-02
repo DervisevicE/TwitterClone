@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import './Tweet.css'
-import like from './like.png';
-import liked from './liked.png';
-import comment from './comment.png';
-import repost from './repost.png';
+import like from '../../assets/like.png';
+import liked from '../../assets/liked.png';
+import comment from '../../assets/comment.png';
+import repost from '../../assets/repost.png';
 
 
 const Tweet = (props) => {

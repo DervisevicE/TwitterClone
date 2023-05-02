@@ -1,7 +1,7 @@
 import React from "react";
 import Suggestion from "../Suggestion/Suggestion";
 import './RightBar.css'
-import search from './search.png'
+import search from '../../assets/search.png'
 
 
 
