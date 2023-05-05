@@ -1,14 +1,14 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const fs = require('fs');
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json);
-app.use(bodyParser.urlencoded);
 
+app.get('/', function(req, res) {
+    res.json( {mssg: "Hello this is working"});
+})
 
 app.get('/tweets', function (req, res) {
     res.json([{

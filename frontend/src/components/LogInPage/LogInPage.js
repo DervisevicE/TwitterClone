@@ -13,7 +13,7 @@ const LogInPage = () => {
             <form className="login_form">
                 <input type="text" name="text" placeholder="Username" />
                 <input type="password" name="password" placeholder="Password" />
-                <input type="submit" value="LogIn" />
+                <input type="submit" value="Log in" />
             </form>
         </div>
     )

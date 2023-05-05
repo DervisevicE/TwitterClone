@@ -13,8 +13,8 @@ import DataProvider from './DataProvider';
 function App() {
   return (
     <div className="App">
-      <LogInPage/>
-      {/* <LeftBar className="left" />
+      {/* <LogInPage/> */}
+       <LeftBar className="left" />
 
       <div className='main'>
         <DataProvider>
@@ -27,7 +27,7 @@ function App() {
           </Routes>
         </DataProvider>
       </div>
-      <RightBar className="right" tweets={tweets} /> */}
+      <RightBar className="right" tweets={tweets} />
     </div>
   );
 }
