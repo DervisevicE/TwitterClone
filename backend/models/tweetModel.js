@@ -4,25 +4,26 @@ const Schema = mongoose.Schema
 
 const tweetSchema = new Schema({
     author: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     content: {
         type: String,
         required: true
     },
-    likes: {
-        type: Number,
-        required: true
-    },
-    comments: {
-        type: Number,
-        required: true
-    },
-    reposts: {
-        type: Number,
-        required: true
-    }
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+    reposts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 }, {timestamps: true})
 
 module.exports = mongoose.model('Tweet', tweetSchema)

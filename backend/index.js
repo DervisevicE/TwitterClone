@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const tweetRoutes = require('./routes/tweets')
+const userRoutes = require('./routes/users')
 const mongoose = require('mongoose')
 
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 app.use('/home', tweetRoutes)
+app.use('/users', userRoutes)
 
 app.get('/', function (req, res) {
     res.json({ mssg: "Hello this is working" })
