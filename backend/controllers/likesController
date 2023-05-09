@@ -1,0 +1,79 @@
+const { default: mongoose } = require('mongoose')
+const Tweet = require('../models/tweetModel')
+const User = require('../models/userModel')
+const Like = require('../models/likeModel')
+
+const getLikes = async (req, res) => {
+    const { tweeId } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(tweeId)) {
+        return res.status(404).json({ error: 'No such tweet' })
+    }
+
+    const tweet = await Tweet.findById(tweeId)
+
+    if (!tweet) {
+        return res.status(404).json({ error: 'No such tweet' })
+    }
+
+    const likesIds = tweet.likes
+
+    const likes = await Likes.find({ _id: { $in: likesIds } })
+
+    res.status(200).json(likes)
+}
+
+
+const likeTweet = async (req, res) => {
+    const { user, tweet } = req.body
+
+    try {
+        const like = await Like.create({ user, tweet })
+        const twt = await Tweet.findById(tweet)
+
+        if (!twt) {
+            return res.status(404).json({ error: 'No such tweet' })
+        }
+
+        twt.likes.push(like._id)
+        await twt.save()
+
+        res.status(200).json(like)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+}
+
+const unlikeTweet = async (req, res) => {
+    const {id} = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'No such like'})
+    }
+
+    const like = await Like.findByIdAndDelete(id)
+
+    if(!like) {
+        return res.status(404).json({error: 'No such like'})
+    }
+
+    const tweet = await Tweet.findById({_id: like.tweet})
+
+    if(!tweet){
+        return res.status(404).json({error: 'No such tweet'})
+    }
+
+    tweet.likes = tweet.likes.filter((l) => l._id !== like._id)
+
+    await tweet.save()
+
+    res.status(200).json({message: 'Tweet unliked successfully'})
+}
+
+
+module.exports = {
+    getLikes,
+    likeTweet,
+    unlikeTweet
+}
