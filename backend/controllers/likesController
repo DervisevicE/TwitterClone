@@ -4,13 +4,13 @@ const User = require('../models/userModel')
 const Like = require('../models/likeModel')
 
 const getLikes = async (req, res) => {
-    const { tweeId } = req.params
+    const { tweetId } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(tweeId)) {
+    if (!mongoose.Types.ObjectId.isValid(tweetId)) {
         return res.status(404).json({ error: 'No such tweet' })
     }
 
-    const tweet = await Tweet.findById(tweeId)
+    const tweet = await Tweet.findById(tweetId)
 
     if (!tweet) {
         return res.status(404).json({ error: 'No such tweet' })
@@ -18,7 +18,7 @@ const getLikes = async (req, res) => {
 
     const likesIds = tweet.likes
 
-    const likes = await Likes.find({ _id: { $in: likesIds } })
+    const likes = await Like.find({ _id: { $in: likesIds } })
 
     res.status(200).json(likes)
 }
@@ -58,15 +58,15 @@ const unlikeTweet = async (req, res) => {
         return res.status(404).json({error: 'No such like'})
     }
 
-    const tweet = await Tweet.findById({_id: like.tweet})
+    const tweet = await Tweet.findByIdAndUpdate(
+        like.tweet,
+        { $pull: { likes: like._id } },
+        { new: true }
+      );
 
     if(!tweet){
         return res.status(404).json({error: 'No such tweet'})
     }
-
-    tweet.likes = tweet.likes.filter((l) => l._id !== like._id)
-
-    await tweet.save()
 
     res.status(200).json({message: 'Tweet unliked successfully'})
 }

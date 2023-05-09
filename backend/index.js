@@ -4,7 +4,8 @@ const cors = require('cors')
 const tweetRoutes = require('./routes/tweets')
 const userRoutes = require('./routes/users')
 const commentRoutes = require('./routes/comments')
-const likeRoutes = require('./routes/likes.js')
+const likeRoutes = require('./routes/likes')
+const repostRoutes = require('./routes/reposts')
 const mongoose = require('mongoose')
 
 const app = express();
@@ -15,6 +16,7 @@ app.use('/tweets', tweetRoutes)
 app.use('/users', userRoutes)
 app.use('/comments', commentRoutes)
 app.use('/likes', likeRoutes)
+app.use('/reposts', repostRoutes)
 
 app.get('/', function (req, res) {
     res.json({ mssg: "Hello this is working" })

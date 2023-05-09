@@ -64,34 +64,18 @@ const deleteComment = async (req, res) => {
         return res.status(404).json({ error: 'No such comment 2' })
     }
 
-    const tweet = await Tweet.findById({ _id: comment.tweet })
+    const tweet = await Tweet.findByIdAndUpdate(
+        comment.tweet,
+        { $pull: { comments: comment._id } },
+        { new: true }
+      );
 
     if (!tweet) {
         return res.status(404).json({ error: 'No such tweet' })
     }
 
-    tweet.comments = tweet.comments.filter((c) => c._id !== comment._id)
-
-    await tweet.save()
-
     return res.status(200).json({ message: 'Comment deleted successfully' })
 }
-
-// const getCommentById = async (req, res) => {
-//     const {id} = req.params
-
-//     if(!mongoose.Types.ObjectId.isValid(id)){
-//         return res.status(404).json({error: 'No such comment'})
-//     }
-
-//     const com = await Comment.findById(id)
-
-//     if(!com){
-//         return res.status(404).json({error: 'No such comment AGAIN'})
-//     }
-
-//     res.status(200).json(com)
-// }
 
 
 module.exports = {
