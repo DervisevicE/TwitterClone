@@ -18,7 +18,7 @@ const tweetSchema = new Schema({
     }],
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Comment'
     }],
     reposts: [{
         type: mongoose.Schema.Types.ObjectId,

@@ -3,14 +3,16 @@ const express = require('express')
 const cors = require('cors')
 const tweetRoutes = require('./routes/tweets')
 const userRoutes = require('./routes/users')
+const commentRoutes = require('./routes/comments')
 const mongoose = require('mongoose')
 
 const app = express();
 
 app.use(cors());
 app.use(express.json())
-app.use('/home', tweetRoutes)
+app.use('/tweets', tweetRoutes)
 app.use('/users', userRoutes)
+app.use('/comments', commentRoutes)
 
 app.get('/', function (req, res) {
     res.json({ mssg: "Hello this is working" })

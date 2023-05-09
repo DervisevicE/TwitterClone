@@ -128,8 +128,8 @@ const followUser = async (req, res) => {
         return res.status(404).json({ error: 'No such user' })
     }
 
-    user.followers.push(follow)
-    follow.following.push(user)
+    user.following.push(follow)
+    follow.followers.push(user)
 
     await user.save()
     await follow.save()
@@ -162,8 +162,11 @@ const unfollowUser = async (req, res) => {
     }
 
     user.following = user.following.filter((follows) => follows._id !== unfollow._id)
+    
+    unfollow.followers = unfollow.followers.filter((follows) => follows._id !== unfollow._id)
 
     await user.save()
+    await unfollow.save()
 
     res.status(200).json({ message: 'User unfollowed successfully' })
 }
