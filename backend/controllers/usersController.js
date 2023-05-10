@@ -1,13 +1,18 @@
 const { default: mongoose } = require('mongoose')
 const User = require('../models/userModel')
 
-const createUser = async (req, res) => {
+const signupUser = async (req, res) => {
+    const { username, email, password } = req.body
     try {
-        const user = await User.create({ ...req.body })
-        res.status(202).json(user)
+        const user = await User.signup(username, email, password)
+        res.status(202).json({username, user})
     } catch (error) {
         res.status(404).json({ mssg: error.message })
     }
+}
+
+const loginUser = async (req, res) => {
+    const { email, password } = req.body
 }
 
 const getUser = async (req, res) => {
@@ -172,7 +177,8 @@ const unfollowUser = async (req, res) => {
 }
 
 module.exports = {
-    createUser,
+    signupUser,
+    loginUser,
     getUser,
     updateUserDetails,
     deleteUser,

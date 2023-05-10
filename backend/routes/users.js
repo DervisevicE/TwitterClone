@@ -1,10 +1,13 @@
 const express = require('express')
-const {createUser, getUser, updateUserDetails, deleteUser, getFollowers, getFollowing, followUser, unfollowUser} = require('../controllers/usersController')
+const {signupUser, loginUser, getUser, updateUserDetails, deleteUser, getFollowers, getFollowing, followUser, unfollowUser} = require('../controllers/usersController')
 const User = require('../models/userModel')
 const router = express.Router()
 
 // CREATE new user
-router.post('/', createUser)
+router.post('/signup', signupUser)
+
+// LOGIN user
+router.post('/login', loginUser)
 
 // GET user by id
 router.get('/:id', getUser)

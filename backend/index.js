@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 app.use('/tweets', tweetRoutes)
-app.use('/users', userRoutes)
+app.use('/user', userRoutes)
 app.use('/comments', commentRoutes)
 app.use('/likes', likeRoutes)
 app.use('/reposts', repostRoutes)
