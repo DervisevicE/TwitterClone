@@ -18,10 +18,8 @@
   width: 25%;
 }
 
-.main {
-  width: 50%;
-  border-left: 2px solid #e7e7e8;
-  border-right: 2px solid #e7e7e8;
+.main{
+  display: flex;
 }
 
 .fade-in {

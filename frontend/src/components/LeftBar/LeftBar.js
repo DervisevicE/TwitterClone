@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
 import './LeftBar.css'
 import home from '../../assets/home.png'
 import explore from '../../assets/explore.png'
@@ -9,6 +10,13 @@ import profile from '../../assets/profile.png'
 import twitterIcon from '../../assets/twitterIcon.png'
 
 const LeftBar = () => {
+
+    const { logout } = useLogout()
+
+    const handleClick = () => {
+        logout()
+    }
+
     return (
         <div className="left_bar">
             <Link className="router_links" to='/'>
@@ -53,6 +61,8 @@ const LeftBar = () => {
             </Link>
 
             <button className="tweetBtn">Tweet</button>
+            <br/>
+            <button className="logoutBtn" onClick={handleClick}>Log out</button>
         </div >
     );
 };

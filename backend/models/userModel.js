@@ -74,11 +74,12 @@ userSchema.statics.signup = async function (username, email, password) {
 }
 
 userSchema.statics.login = async function (username, email, password) {
+
     if(!email || !password || !username) {
         throw new Error('Please provide email, username and password')
     }
 
-    const user = await this.findOne({ $or: [{ email }, { username }] })
+    const user = await this.findOne({ email, username })
 
     if (!user) {
         throw new Error('Invalid credentials')
