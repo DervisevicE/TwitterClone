@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Feed from './pages/Feed/Feed';
 import LeftBar from './components/LeftBar/LeftBar';
@@ -10,11 +10,14 @@ import LogInPage from './pages/LogInPage/LogInPage';
 import tweets from './data.json';
 import DataProvider from './DataProvider';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
 
   const location = useLocation();
   const { pathname } = location;
+
+  const {user} = useAuthContext();
 
   const isLoginPage = pathname === '/login';
   const isSignupPage = pathname === '/signup';
@@ -22,20 +25,22 @@ function App() {
 
   return (
     <div className="App"> 
-       <LeftBar className="left" />
+       {user && <LeftBar className="left" />}
       <div className='main'>
         <DataProvider>
           <Routes>
-            <Route path='/login' element={<LogInPage />} />
-            <Route path='/signup' element={<SignUpPage />} />
-            <Route path='/' element={<Feed />} />
-            <Route path='/home' element={<Feed />} />
-            <Route path='/explore' element={<Explore />} />
-            <Route path='/notifications' element={<Notifications />} />
-            <Route path='/bookmarks' element={<Bookmarks />} />
+            <Route path='/login' element={!user ? <LogInPage /> : <Navigate to='/' />} />
+            <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
+            
+            <Route path='/' element={user ? <Feed /> : <Navigate to='/login' />} />
+            <Route path='/home' element={user ? <Feed /> : <Navigate to='/login' />} />
+            <Route path='/explore' element={user ? <Explore /> : <Navigate to='/login' />} />
+            <Route path='/notifications' element={user ? <Notifications /> : <Navigate to='/login' />} />
+            <Route path='/bookmarks' element={user ? <Bookmarks /> : <Navigate to='/login' />} />
           </Routes>
         </DataProvider>
       </div>
+      {user && <RightBar className="right" tweets={tweets} />}
       {/* {!isLoginPage && !isSignupPage && <RightBar className="right" tweets={tweets} />} */}
     </div>
   );
