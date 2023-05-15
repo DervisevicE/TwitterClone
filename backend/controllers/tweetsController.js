@@ -4,27 +4,27 @@ const User = require('../models/userModel')
 
 // get all tweets
 const getTweets = async (req, res) => {
-    const {userId} = req.params
+    const userId = req.user;
 
-    if(!mongoose.Types.ObjectId.isValid(userId)){
+    if(!mongoose.Types.ObjectId.isValid(userId._id)){
         return res.status(404).json({error: 'No such user'})
     }
 
-    const user = await User.findById({_id:userId})
+    const user = await User.findById({_id:userId._id})
 
     if(!user){
         return res.status(404).json({error: 'No such user'})
     }
 
     const tweets = await Tweet.find({
-        author: {$in: [...user.following, userId]} 
+        author: {$in: [...user.following, userId._id]} 
     }).sort({createdAt: -1})
 
     res.status(200).json(tweets)
 }
 
 const getUserTweets = async (req, res) => {
-    const {userId} = req.params
+    const userId = req.user;
 
     if(!mongoose.Types.ObjectId.isValid(userId)){
         return res.status(404).json({error: 'No such user'})
@@ -45,9 +45,10 @@ const getUserTweets = async (req, res) => {
 
 // post new tweet
 const createTweet = async (req, res) => {
-    const { author, content, likes, comments, reposts } = req.body
+    const author = req.user
+    const { content } = req.body
     try {
-        const tweet = await Tweet.create({ author, content, likes, comments, reposts })
+        const tweet = await Tweet.create({ author, content})
         res.status(200).json(tweet)
     } catch (error) {
         res.status(400).json({ error: error.message })

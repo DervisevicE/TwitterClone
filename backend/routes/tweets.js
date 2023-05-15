@@ -7,10 +7,10 @@ const router = express.Router()
 
 
 // GET all tweets
-router.get('/:userId', getTweets)
+router.get('/', getTweets)
 
 //GET user's tweets
-router.get('/me/:userId', getUserTweets)
+router.get('/me', getUserTweets)
 
 // POST new tweet
 router.post('/', createTweet)

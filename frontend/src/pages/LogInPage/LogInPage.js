@@ -6,9 +6,9 @@ import icon from '../../assets/twitterIcon.png';
 
 
 const LogInPage = () => {
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('esma111')
+    const [email, setEmail] = useState('esma111@esma.com')
+    const [password, setPassword] = useState('ABCabc123!')
     const {login, error, isLoading} = useLogin()
   
     const handleSubmit = async (e) => {

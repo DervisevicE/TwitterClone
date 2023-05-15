@@ -27,7 +27,7 @@ function App() {
     <div className="App"> 
        {user && <LeftBar className="left" />}
       <div className='main'>
-        <DataProvider>
+        {/* <DataProvider> */}
           <Routes>
             <Route path='/login' element={!user ? <LogInPage /> : <Navigate to='/' />} />
             <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
@@ -38,7 +38,7 @@ function App() {
             <Route path='/notifications' element={user ? <Notifications /> : <Navigate to='/login' />} />
             <Route path='/bookmarks' element={user ? <Bookmarks /> : <Navigate to='/login' />} />
           </Routes>
-        </DataProvider>
+        {/* </DataProvider> */}
       </div>
       {user && <RightBar className="right" tweets={tweets} />}
       {/* {!isLoginPage && !isSignupPage && <RightBar className="right" tweets={tweets} />} */}

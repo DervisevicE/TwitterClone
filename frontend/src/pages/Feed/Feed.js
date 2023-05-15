@@ -1,36 +1,51 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import NewPost from "../../components/NewPost/NewPost";
 import Tweet from "../../components/Tweet/Tweet";
 import './Feed.css';
-import { DataContext } from "../../DataProvider";
-import LeftBar from "../../components/LeftBar/LeftBar";
-import RightBar from "../../components/RightBar/RightBar";
-import tweets from '../../data.json';
-
+import { apiURL } from "../../constants";
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useTweetsContext } from '../../hooks/useTweetsContext.js';
 
 const Feed = () => {
 
-    const {data, updateData} = useContext(DataContext);
-    console.log(data)
+    const { tweets, dispatch } = useTweetsContext();
+    const { user } = useAuthContext();
+
+    useEffect(() => {
+        const fetchTweets = async () => {
+            const response = await fetch(apiURL + '/tweets', {
+                headers: { 'Authorization': `Bearer ${user.token}` },
+            })
+            const json = await response.json()
+
+            if (response.ok) {
+                dispatch({ type: 'SET_TWEETS', payload: json })
+            }
+        }
+
+        if (user) {
+            fetchTweets()
+        }
+    }, [dispatch, user])
 
     const addTweetHandler = (newTweet) => {
-        console.log(newTweet);
-        updateData([
-            newTweet,
-            ...data
-        ]);
-      };
-      
-      
+        // console.log(newTweet);
+        // updateData([
+        //     newTweet,
+        //     ...data
+        // ]);
+    };
+
+
     return (
 
-            <div className="feed fade-in">
-                <div className="title"><h2>Home</h2></div>
-                <NewPost onAddTweet={addTweetHandler} />
-                    {data.map((tweet) => (
-                    <Tweet key={tweet.id} tweet={tweet} />
-                ))}
-            </div>
+        <div className="feed fade-in">
+            <div className="title"><h2>Home</h2></div>
+            <NewPost onAddTweet={addTweetHandler} />
+            {tweets && tweets.map((tweet) => (
+                <Tweet key={tweet._id} tweet={tweet} />
+            ))}
+        </div>
 
     );
 }

@@ -1,7 +1,7 @@
 const { default: mongoose } = require('mongoose')
 const Tweet = require('../models/tweetModel')
-const User = require('../models/userModel')
 const Like = require('../models/likeModel')
+const User = require('../models/userModel')
 
 const getLikes = async (req, res) => {
     const { tweetId } = req.params
@@ -25,10 +25,15 @@ const getLikes = async (req, res) => {
 
 
 const likeTweet = async (req, res) => {
-    const { user, tweet } = req.body
+    const user = req.user;
+    const { tweet } = req.body
 
+    const exists = await Like.findOne({ user: user._id, tweet: tweet })
+    if (exists) {
+        return res.status(400).json({ error: 'You already liked this tweet' })
+    }
     try {
-        const like = await Like.create({ user, tweet })
+        const like = await Like.create({user: user._id, tweet: tweet })
         const twt = await Tweet.findById(tweet)
 
         if (!twt) {
@@ -46,29 +51,30 @@ const likeTweet = async (req, res) => {
 }
 
 const unlikeTweet = async (req, res) => {
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such like'})
+    const { id } = req.params
+    const user = req.user;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such like' })
     }
 
     const like = await Like.findByIdAndDelete(id)
 
-    if(!like) {
-        return res.status(404).json({error: 'No such like'})
+    if (!like) {
+        return res.status(404).json({ error: 'No such like' })
     }
 
     const tweet = await Tweet.findByIdAndUpdate(
         like.tweet,
         { $pull: { likes: like._id } },
         { new: true }
-      );
+    );
 
-    if(!tweet){
-        return res.status(404).json({error: 'No such tweet'})
+    if (!tweet) {
+        return res.status(404).json({ error: 'No such tweet' })
     }
 
-    res.status(200).json({message: 'Tweet unliked successfully'})
+    res.status(200).json({ message: 'Tweet unliked successfully' })
 }
 
 

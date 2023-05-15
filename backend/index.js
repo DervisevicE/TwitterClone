@@ -6,15 +6,18 @@ const commentRoutes = require('./routes/comments')
 const likeRoutes = require('./routes/likes')
 const repostRoutes = require('./routes/reposts')
 const mongoose = require('mongoose')
+const cors = require('cors')
+const jwtGuard = require('./middleware/auth');
 
 const app = express();
 
+app.use(cors());
+app.use(express.json());
 
-app.use(express.json())
-app.use('/tweets', tweetRoutes)
+app.use('/tweets', jwtGuard, tweetRoutes);
 app.use('/user', userRoutes)
 app.use('/comments', commentRoutes)
-app.use('/likes', likeRoutes)
+app.use('/likes', jwtGuard, likeRoutes)
 app.use('/reposts', repostRoutes)
 
 app.get('/', function (req, res) {
