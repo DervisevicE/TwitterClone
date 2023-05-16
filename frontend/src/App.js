@@ -11,6 +11,7 @@ import tweets from './data.json';
 import DataProvider from './DataProvider';
 import SignUpPage from './pages/SignUpPage/SignUpPage';
 import { useAuthContext } from './hooks/useAuthContext';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
             <Route path='/explore' element={user ? <Explore /> : <Navigate to='/login' />} />
             <Route path='/notifications' element={user ? <Notifications /> : <Navigate to='/login' />} />
             <Route path='/bookmarks' element={user ? <Bookmarks /> : <Navigate to='/login' />} />
+            <Route path='/profile' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
           </Routes>
         {/* </DataProvider> */}
       </div>

@@ -1,74 +1,100 @@
 .tweet {
-    display: block;
-    justify-content: center;
-    width: auto;
-    padding: 0px 32px;
-    align-items: flex-start;
-    border-bottom: 2px solid #e7e7e8;
-    padding-top: 8px;
+  display: block;
+  justify-content: center;
+  padding: 10px 32px;
+  border-bottom: 2px solid #f7f9f9;
+  margin-left: calc(-250px + 32px);
+  margin-right: -250px;
+  box-sizing: border-box;
+
 }
 
 .user_details {
-    display: flex;
+  display: flex;
+}
+
+.tweet .avatar {
+  flex-shrink: 0;
 }
 
 .username,
 .username_bold {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
 }
 
 .username_bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .content {
-    margin: 0px 70px;
-    margin-bottom: 12px;
+  margin: 0px 70px;
+  margin-bottom: 12px;
 }
 
 .interactions {
-    margin: 0px 70px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 0px 80px;
+  margin: 0px 70px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0px 80px;
 }
 
 .interactions div {
-    padding: 2px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  padding: 2px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.interactions>div>img {
-    width: 26px;
-    height: 26px;
+.interactions div img {
+  width: 26px;
+  height: 26px;
 }
 
 .interactions div:hover {
-    background-color: #1d9cf07e;
-    border-radius: 9999px;
-    cursor: pointer;
+  background-color: #1d9cf07e;
+  border-radius: 9999px;
+  cursor: pointer;
 }
 
 .interactions p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-weight: 300;
 }
 
 .updated {
-    color: #1d9cf0;
+  color: #1d9cf0;
 }
 
 .tweet:hover {
-    background-color: #f7f7f7;
+  background-color: #f7f7f7;
+}
+
+@media (max-width: 768px) {
+  .user_details {
+    justify-content: flex-start;
+  }
+
+  .content,
+  .interactions {
+    margin: 0px 10px;
+    padding: 0;
+  }
+
+  .interactions div {
+    margin-bottom: 4px;
+  }
+
+  .tweet {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

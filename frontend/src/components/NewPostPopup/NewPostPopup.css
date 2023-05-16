@@ -1,0 +1,45 @@
+.new_post_popup {
+    background-color: white;
+    padding: 50px;
+    width: 25vw;
+    height: 25vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.closeBtn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+    margin-right: -10px;
+}
+
+.avatar-container {
+    align-self: flex-start;
+}
+
+.content-container {
+    flex-grow: 1;
+}
+
+.new_post_popup_text {
+    height: 80px;
+    width: 100%;
+    max-width: 400px;
+    border: 2px solid #f7f9f9;
+    padding: 8px;
+}
+
+.new_post_popup button[type='submit'] {
+    background-color: #1d9bf0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 12px;
+    align-self: flex-end;
+}

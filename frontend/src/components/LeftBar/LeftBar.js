@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../hooks/useLogout";
 import './LeftBar.css'
@@ -8,13 +9,20 @@ import bell from '../../assets/bell.png'
 import bookmark from '../../assets/bookmark.png'
 import profile from '../../assets/profile.png'
 import twitterIcon from '../../assets/twitterIcon.png'
+import NewPostPopup from "../NewPostPopup/NewPostPopup";
 
 const LeftBar = () => {
 
     const { logout } = useLogout()
 
-    const handleClick = () => {
+    const [isTweetAction, setIsTweetAction] = useState(false);
+
+    const handleLogoutClick = () => {
         logout()
+    }
+
+    const handleTweetClick = () => {
+        setIsTweetAction(true)
     }
 
     return (
@@ -60,9 +68,11 @@ const LeftBar = () => {
                 </div>
             </Link>
 
-            <button className="tweetBtn">Tweet</button>
+            <button className="tweetBtn" onClick={handleTweetClick}>Tweet</button>
             <br/>
-            <button className="logoutBtn" onClick={handleClick}>Log out</button>
+            <button className="logoutBtn" onClick={handleLogoutClick}>Log out</button>
+
+            {isTweetAction &&  <NewPostPopup setIsTweetAction={setIsTweetAction}/> }
         </div >
     );
 };

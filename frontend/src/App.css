@@ -18,8 +18,16 @@
   width: 25%;
 }
 
-.main{
+.main { 
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 250px; /* Adjust the padding to accommodate the width of the left sidebar */
+  padding-right: 250px; /* Adjust the padding to accommodate the width of the right sidebar */
+  box-sizing: border-box; /* Include padding in the total width */
 }
 
 .fade-in {
@@ -38,6 +46,12 @@
   }
 }
 
+
+@media (max-width: 768px) {
+  .main {
+    padding: 0 16px; /* Adjust the padding on smaller devices */
+  }
+} 
 /*
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -1,80 +1,105 @@
 .left_bar {
-    width: 25%;
-    height: 100%;
-    padding-left: 42px;
-    padding-right: 22px;
-    position: sticky;
-    top: 0;
-  }
-  
+  width: 25%;
+  height: 100%;
+  padding-left: 42px;
+  padding-right: 22px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 
 .text {
-    font-size: 18px;
-    padding-right: 10px;
+  font-size: 18px;
+  padding-right: 10px;
 }
 
 .item {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-    width: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  width: fit-content;
 }
 
 .item:hover {
-    background-color: #e7e7e8;
-    border-radius: 30px;
-    cursor: pointer;
+  background-color: #e7e7e8;
+  border-radius: 30px;
+  cursor: pointer;
 
 }
 
 .icon {
-    width: 50px;
-    height: 45px;
-    margin-right: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 50px;
+  height: 45px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon img {
-    height: 35px;
-    width: 35px;
+  height: 35px;
+  width: 35px;
 }
 
 .twitter:hover {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .twitter_logo img {
-    height: 45px;
-    width: 45px;
+  height: 45px;
+  width: 45px;
 }
 
 .tweetBtn {
-    background-color: #1d9bf0;
-    border-radius: 9999px;
-    padding: 12px 70px;
-    cursor: pointer;
-    border: none;
-    color: white;
-    font-weight: bold;
-    font-size: 17px;
+  background-color: #1d9bf0;
+  border-radius: 9999px;
+  padding: 12px 70px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 17px;
 }
 
 .logoutBtn {
-    background-color: #e7e7e8;
-    margin-top: 20px;
-    border-radius: 9999px;
-    padding: 12px 64px;
-    cursor: pointer;
-    border: none;
-    font-weight: bold;
-    font-size: 17px;
+  background-color: #e7e7e8;
+  margin-top: 20px;
+  border-radius: 9999px;
+  padding: 12px 64px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.router_links{
-    text-decoration: none;
-    color: black;
+.router_links {
+  text-decoration: none;
+  color: black;
+}
+
+
+@media (max-width: 768px) {
+  .text {
+    display: none;
+  }
+
+  .item {
+    justify-content: center;
+  }
+
+  .item .text {
+    display: none;
+  }
+
+  .tweetBtn {
+    display: none;
+  }
+
+  .logoutBtn {
+    display: none;
+  }
+
 }

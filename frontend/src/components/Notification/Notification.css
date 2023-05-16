@@ -12,6 +12,9 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #e7e7e8;
+    margin-left: calc(-250px + 32px);
+    margin-right: -250px;
+    box-sizing: border-box;
 }
 
 .notification_content {
@@ -25,3 +28,9 @@
     background-color: #f7f7f7;
 }
 
+@media (max-width: 768px) {
+    .notification {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

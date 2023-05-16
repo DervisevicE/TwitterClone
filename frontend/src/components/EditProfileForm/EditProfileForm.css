@@ -1,0 +1,71 @@
+.form_background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+}
+
+.edit_profile_form {
+    background-color: white;
+    padding: 50px;
+    width: 25vw;
+    height: 25vh;
+    border-radius: 5px;
+}
+
+.closeBtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.closeBtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.closeBtn button:hover {
+    background-color: #e7e7e8;
+    border-radius: 50%;
+}
+
+.closeBtn button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.edit_profile_form
+input[type='text'],
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+.edit_profile_form
+button[type='submit'] {
+    background-color: #1d9bf0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 12px;
+}

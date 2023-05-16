@@ -1,17 +1,25 @@
 .notifications {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .title {
-    position: sticky;
-    top: 0;
-    background-color: #ffffffed;
-    padding: 28px 0px;
-    padding-left: 42px;
-    border-bottom: 2px solid #f7f7f7; 
+  position: sticky;
+  top: 0;
+  background-color: #ffffffed;
+  padding: 28px 0px;
+  padding-left: 52px;
+  margin-left: calc(-250px + 32px);
+  margin-right: -250px;
 }
 
-  
+@media (max-width: 768px) {
+
+  .title {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 16px;
+  }
+}
