@@ -24,10 +24,10 @@ const NewPostPopup = ({ setIsTweetAction }) => {
                 <div className="closeBtn">
                     <button onClick={() => { setIsTweetAction(false); }}> X </button>
                 </div>
-                <div className="avatar-container">
+                <div className="avatar_container">
                     <Avatar />
                 </div>
-                <div className="content-container">
+                <div className="content_container">
                     <input className='new_post_popup_text' placeholder='Test Test' type="text" value={content} onChange={handleContentChange} />
                 </div>
                 <button type="submit">Save</button>

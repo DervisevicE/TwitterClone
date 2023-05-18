@@ -8,12 +8,14 @@ import repost from '../../assets/repost.png';
 import { apiURL } from "../../constants";
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLikesContext } from '../../hooks/useLikesContext';
+import CommentForm from "../CommentForm/CommentForm";
+import Comment from "../Comment/Comment";
 
 const Tweet = (props) => {
     const [author, setAuthor] = useState(null);
     const userId = props.tweet.author;
     const { user } = useAuthContext();
-    const { likes, dispatch } = useLikesContext();
+    const { dispatch } = useLikesContext();
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -42,6 +44,8 @@ const Tweet = (props) => {
     const [likesNumber, setLikes] = useState(props.tweet.likes.length);
     const [isClicked, setIsClicked] = useState(userLiked);
     const [likeLoading, setLikeLoading] = useState(false);
+
+    const [showComments, setShowComments] = useState(false)
 
 
 
@@ -91,9 +95,13 @@ const Tweet = (props) => {
         setLikeLoading(false);
     }
 
+    const showCommentsHandler = () => {
+        setShowComments(!showComments)
+    }
+
     console.log(likesNumber)
     return (
-        <div className="tweet">
+        <div className={`tweet ${!showComments ? 'tweet-hover' : ''}`}>
             <div className="user_details">
                 <Avatar />
                 <p className="username_bold">{author && author.username}</p>
@@ -103,9 +111,11 @@ const Tweet = (props) => {
             </p>
             <div className="interactions">
                 <div onClick={updateLikesHandler} disabled={likeLoading}><img src={isClicked ? liked : like} alt="like" /> </div> <p className={isClicked ? "updated" : ""}>{likesNumber}</p>
-                <div><img src={comment} alt="comment" /> </div> <p>{props.tweet.comments.length}</p>
+                <div onClick={showCommentsHandler}><img src={comment} alt="comment" /> </div> <p>{props.tweet.comments.length}</p>
                 <div><img src={repost} alt="repost" /> </div> <p>{props.tweet.reposts.length}</p>
             </div>
+            {showComments && <CommentForm/>  }
+                {showComments && <Comment/>}
         </div>
     );
 };

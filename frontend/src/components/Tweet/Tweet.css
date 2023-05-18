@@ -74,8 +74,9 @@
   color: #1d9cf0;
 }
 
-.tweet:hover {
+.tweet-hover:hover {
   background-color: #f7f7f7;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,38 @@
+.comment {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 32px;
+    border-bottom: 2px solid #e7e7e8;
+    box-sizing: border-box;
+  }
+  
+  .comment .avatar {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    margin-right: 16px; /* Add margin to create space between avatar and comment content */
+  }
+  
+  .comment_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+  
+  .comment_content p {
+    margin: 0; /* Reset margin to remove extra spacing */
+  }
+  
+  .comment:hover {
+    background-color: #f7f7f7;
+  }
+  
+  @media (max-width: 768px) {
+    .comment {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  
