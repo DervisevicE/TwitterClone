@@ -21,7 +21,7 @@ const LogInPage = () => {
         <div className="login_page">
             <div>
                 <img src={icon} />
-                <p>Welcome Back</p>
+                <p>Welcome back</p>
             </div>
             <form className="login_form" onSubmit={handleSubmit}>
             <input 
@@ -45,6 +45,7 @@ const LogInPage = () => {
                 <button disabled={isLoading}>Log in</button>
                 {error && <div className="error">{error}</div>}
             </form>
+            <p>Don't have an account? <a href="/signup">Sign up</a></p>
         </div>
     )
 }

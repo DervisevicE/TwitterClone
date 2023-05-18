@@ -1,10 +1,10 @@
 .signup_page{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto;
-    padding: 10rem;
+    padding: 10rem;  
 }
 
 .signup_page>div{
@@ -59,4 +59,14 @@
 
 .signup_form input:focus{
     border: 1px solid #e7e7e8;
+}
+
+.signup_page a{
+    text-decoration: none;
+    color: #1d9bf0;
+    font-weight: bold;
+}
+
+.signup_page p{
+    font-size: 1.2rem;
 }

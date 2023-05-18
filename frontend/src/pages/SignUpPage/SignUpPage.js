@@ -19,7 +19,7 @@ const SignupPage = () => {
     <div className="signup_page">
         <div>
             <img src={icon} />
-                <p>SignUp</p>
+                <p>Sign up</p>
         </div>
         <form className="signup_form" onSubmit={handleSubmit}>
           <label>Username:</label>
@@ -44,6 +44,7 @@ const SignupPage = () => {
             <button disabled={isLoading}>Sign up</button>
             {error && <div className="error">{error}</div>}
         </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
     </div>
   )
 }
