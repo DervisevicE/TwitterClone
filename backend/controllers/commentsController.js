@@ -4,10 +4,11 @@ const User = require('../models/userModel')
 const Comment = require('../models/commentModel')
 
 const createComment = async (req, res) => {
-    const { content, author, tweet } = req.body;
+    const { content, tweet } = req.body;
+    const id = req.user._id;
 
     try {
-        const comment = await Comment.create({ content, author, tweet });
+        const comment = await Comment.create({ content: content, author: id, tweet: tweet });
 
         const twt = await Tweet.findById(tweet);
 
@@ -77,9 +78,25 @@ const deleteComment = async (req, res) => {
     return res.status(200).json({ message: 'Comment deleted successfully' })
 }
 
+const getCommentById = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such comment' })
+    }
+
+    const comment = await Comment.findById(id)
+
+    if (!comment) {
+        return res.status(404).json({ error: 'No such comment' })
+    }
+
+    return res.status(200).json(comment)
+}
 
 module.exports = {
     createComment,
     getComments,
     deleteComment,
+    getCommentById
 }

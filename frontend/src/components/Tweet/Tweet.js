@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import './Tweet.css'
 import like from '../../assets/like.png';
@@ -10,32 +10,14 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLikesContext } from '../../hooks/useLikesContext';
 import CommentForm from "../CommentForm/CommentForm";
 import Comment from "../Comment/Comment";
+import { useCommentsContext } from "../../hooks/useCommentsContext";
 
 const Tweet = (props) => {
-    const [author, setAuthor] = useState(null);
-    const userId = props.tweet.author;
+
     const { user } = useAuthContext();
     const { dispatch } = useLikesContext();
+    const { comments, commentsDispatch } = useCommentsContext()
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-
-                const response = await fetch(apiURL + `/user/${userId}`);
-
-                if (response.ok) {
-                    const userData = await response.json();
-                    setAuthor(userData);
-                } else {
-                    console.error('Failed to fetch user');
-                }
-            } catch (error) {
-                console.error('Error fetching user:', error);
-            }
-        };
-
-        fetchUser();
-    }, [userId]);
 
 
     const userLiked = props.tweet.likes.find(like => like.user === user._id)
@@ -44,7 +26,6 @@ const Tweet = (props) => {
     const [likesNumber, setLikes] = useState(props.tweet.likes.length);
     const [isClicked, setIsClicked] = useState(userLiked);
     const [likeLoading, setLikeLoading] = useState(false);
-
     const [showComments, setShowComments] = useState(false)
 
 
@@ -66,8 +47,7 @@ const Tweet = (props) => {
             })
 
             const json = await response.json()
-            console.log(json)
-            console.log(JSON.stringify(json))
+
             if (response.ok) {
                 dispatch({ type: 'SET_LIKES', payload: json })
                 setLikes(likesNumber + 1)
@@ -95,17 +75,36 @@ const Tweet = (props) => {
         setLikeLoading(false);
     }
 
-    const showCommentsHandler = () => {
-        setShowComments(!showComments)
-    }
 
-    console.log(likesNumber)
+    const showCommentsHandler = async () => {
+        setShowComments(!showComments);
+
+        if (!showComments) {
+            if (props.tweet.comments.length !== 0) {
+                const response = await fetch(apiURL + `/comments/${props.tweet._id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const json = await response.json();
+
+                if (response.ok) {
+                    commentsDispatch({ type: 'SET_COMMENTS', payload: json });
+                }
+            } else {
+                commentsDispatch({ type: 'SET_COMMENTS', payload: [] });
+            }
+        }
+    };
+
     return (
         <div className={`tweet ${!showComments ? 'tweet-hover' : ''}`}>
             <div className="user_details">
                 <Avatar />
-                <p className="username_bold">{author && author.username}</p>
-                <p className="username">{author && author.username}</p>
+                <p className="username_bold">{user?.username}</p>
+                <p className="username">{user?.username}</p>
             </div>
             <p className="content"> {props.tweet.content}
             </p>
@@ -114,8 +113,14 @@ const Tweet = (props) => {
                 <div onClick={showCommentsHandler}><img src={comment} alt="comment" /> </div> <p>{props.tweet.comments.length}</p>
                 <div><img src={repost} alt="repost" /> </div> <p>{props.tweet.reposts.length}</p>
             </div>
-            {showComments && <CommentForm/>  }
-                {showComments && <Comment/>}
+            {showComments && <CommentForm tweetId={props.tweet._id} />}
+            {showComments &&
+                comments &&
+                comments.map((comment) => (
+                    <Comment key={comment._id} comment={comment} />
+                ))
+            }
+
         </div>
     );
 };

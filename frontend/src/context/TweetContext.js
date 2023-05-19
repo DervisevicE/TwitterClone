@@ -20,6 +20,10 @@ export const tweetsReducer = (state, action) => {
             return {
                 tweets: state.tweets.map((t) => t._id === action.payload._id ? action.payload : t)
             }
+        case 'SET_COMMENTS':
+            return {
+                tweets: state.tweets.map((t) => t._id === action.payload[0].tweet ? { ...t, comments: action.payload } : t)
+            }
         default:
             return state
     }

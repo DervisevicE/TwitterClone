@@ -2,31 +2,34 @@ import React, { useState } from "react";
 import './NewPost.css';
 import Avatar from '../Avatar/Avatar';
 import { apiURL } from "../../constants";
-const NewPost = (props) => {
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useTweetsContext } from "../../hooks/useTweetsContext";
+
+
+const NewPost = () => {
 
     const [enteredText, setEnteredText] = useState("");
+    const { dispatch } = useTweetsContext();
+    const { user } = useAuthContext();
 
     const addTweetHandler = async (e) => {
         e.preventDefault();
 
-        const newTweet = { content: enteredText };
-
-        const user = localStorage.getItem('user');
-
-        const response = await fetch(apiURL + "/tweets", {  
-            method: "POST",
-            body: JSON.stringify(newTweet),
+        const response = await fetch(apiURL + '/tweets', {
+            method: 'POST',
             headers: {
+                'Authorization': `Bearer ${user.token}`,
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + user.token
             },
-        });
+            body: JSON.stringify({ content: enteredText })
+        })
 
-        const data = await response.json();
-        console.log(data);
+        const json = await response.json()
 
-        // props.onAddTweet(newTweet);
+        if (response.ok) {
+            dispatch({ type: 'CREATE_TWEET', payload: json })
+        }
+
         setEnteredText("");
     }
 

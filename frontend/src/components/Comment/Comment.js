@@ -2,12 +2,13 @@ import React from "react";
 import './Comment.css'
 import Avatar from "../Avatar/Avatar";
 
-const Comment = () => {
+const Comment = (props) => {
+
     return (
         <div className="comment">
             <Avatar />
             <div className="comment_content">
-                <p>This is content of my comment. Bla bla bla bla bla.</p>
+                <p>{props.comment.content}t</p>
             </div>
 
         </div>

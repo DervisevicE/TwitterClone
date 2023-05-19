@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import { TweetsContextProvider } from './context/TweetContext';
 import { LikesContextProvider } from './context/LikeContext';
+import { CommentsContextProvider } from './context/CommentContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,9 +14,11 @@ root.render(
     <AuthContextProvider>
       <TweetsContextProvider>
         <LikesContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <CommentsContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </CommentsContextProvider>
         </LikesContextProvider>
       </TweetsContextProvider>
     </AuthContextProvider>

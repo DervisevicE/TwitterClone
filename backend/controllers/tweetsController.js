@@ -24,7 +24,7 @@ const getTweets = async (req, res) => {
 }
 
 const getUserTweets = async (req, res) => {
-    const userId = req.user;
+    const userId = req.user._id;
 
     if(!mongoose.Types.ObjectId.isValid(userId)){
         return res.status(404).json({error: 'No such user'})
@@ -45,7 +45,7 @@ const getUserTweets = async (req, res) => {
 
 // post new tweet
 const createTweet = async (req, res) => {
-    const author = req.user
+    const author = req.user._id
     const { content } = req.body
     try {
         const tweet = await Tweet.create({ author, content})

@@ -28,20 +28,13 @@ const Feed = () => {
         }
     }, [dispatch, user])
 
-    const addTweetHandler = (newTweet) => {
-        // console.log(newTweet);
-        // updateData([
-        //     newTweet,
-        //     ...data
-        // ]);
-    };
 
 
     return (
 
         <div className="feed fade-in">
             <div className="title"><h2>Home</h2></div>
-            <NewPost onAddTweet={addTweetHandler} />
+            <NewPost />
             {tweets && tweets.map((tweet) => (
                 <Tweet key={tweet._id} tweet={tweet} />
             ))}

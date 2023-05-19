@@ -69,3 +69,15 @@ button[type='submit'] {
     font-weight: bold;
     margin-top: 12px;
 }
+
+.edit_profile_form
+button[type='text'] {
+    background-color: #1d9bf0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 12px;
+}

@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import './EditProfileForm.css'
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { apiURL } from '../../constants';
 
 const EditProfileForm = ({ setIsEditing }) => {
+
+    const { user, dispatch } = useAuthContext();
+
     const [name, setName] = useState('');
     const [bio, setBio] = useState('');
 
@@ -13,14 +18,27 @@ const EditProfileForm = ({ setIsEditing }) => {
         setBio(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission
-        console.log('Name:', name);
-        console.log('Bio:', bio);
-        // Reset input fields
+
+        const response = await fetch(apiURL + '/user', {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${user.token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: name, bio: bio })
+        })
+
+        const json = await response.json()
+
+        if (response.ok) {
+            dispatch({ type: 'UPDATE_USER', payload: {...json, token: user.token} })
+        }
+
         setName('');
         setBio('');
+        setIsEditing(false);
     };
 
     return (
@@ -35,7 +53,7 @@ const EditProfileForm = ({ setIsEditing }) => {
                 </div>
                 <div>
                     <label htmlFor="bio">Bio:</label>
-                    <textarea id="bio" value={bio} onChange={handleBioChange} />
+                    <textarea id="bio" value={user.bio} onChange={handleBioChange} />
                 </div>
                 <button type="submit">Save</button>
             </form>
