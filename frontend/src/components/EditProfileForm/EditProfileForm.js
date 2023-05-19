@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './EditProfileForm.css'
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { apiURL } from '../../constants';
@@ -40,10 +40,23 @@ const EditProfileForm = ({ setIsEditing }) => {
         setBio('');
         setIsEditing(false);
     };
+    let editProfileRef = useRef();
+    useEffect(() => {
+        let handler = (event) => {
+            if (!editProfileRef.current.contains(event.target)) {
+                setIsEditing(false);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        };
+    });
 
     return (
-        <div className='form_background'>
-            <form className='edit_profile_form' onSubmit={handleSubmit}>
+        <div className='form_background transition'>
+            <form className='edit_profile_form' onSubmit={handleSubmit} ref={editProfileRef}>
                 <div className="closeBtn">
                     <button onClick={() => { setIsEditing(false); }}> X </button>
                 </div>

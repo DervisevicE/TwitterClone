@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './NewPostPopup.css'
 import Avatar from '../Avatar/Avatar';
 import { apiURL } from "../../constants";
@@ -34,9 +34,24 @@ const NewPostPopup = ({ setIsTweetAction }) => {
         setIsTweetAction(false);
     }
 
+    let newPostRef = useRef();
+    useEffect(() => {
+        let handler = (event) => {
+            if (!newPostRef.current.contains(event.target)) {
+                setIsTweetAction(false);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        };
+    });
+    
+
     return (
         <div className='form_background'>
-            <form className='new_post_popup' onSubmit={handleSubmit}>
+            <form className='new_post_popup transition' onSubmit={handleSubmit} ref={newPostRef}>
                 <div className="closeBtn">
                     <button onClick={() => { setIsTweetAction(false); }}> X </button>
                 </div>

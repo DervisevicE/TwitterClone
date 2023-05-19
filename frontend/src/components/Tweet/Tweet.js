@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Avatar from "../Avatar/Avatar";
 import './Tweet.css'
 import like from '../../assets/like.png';

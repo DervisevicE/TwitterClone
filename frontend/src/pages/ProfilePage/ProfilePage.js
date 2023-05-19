@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './ProfilePage.css'
 import Avatar from '../../components/Avatar/Avatar';
 import Notification from '../../components/Notification/Notification';
@@ -41,7 +41,7 @@ const ProfilePage = () => {
     };
 
     return (
-        <div className='profile_page'>
+        <div className='profile_page fade-in'>
             <div className="title"><h2></h2></div>
 
             <div className='header'>
