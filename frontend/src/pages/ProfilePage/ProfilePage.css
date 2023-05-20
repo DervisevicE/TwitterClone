@@ -32,13 +32,13 @@
     flex-grow: 1;
 }
 
-.user_names{
+.user_names {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-around;
     padding: 12px 0px;
-    
+
 }
 
 .handle,
@@ -92,6 +92,13 @@
     color: white;
     font-weight: bold;
     font-size: 14px;
+}
+
+.suggestions .suggestion{
+    border-bottom: 2px solid #f7f9f9;
+    margin-left: calc(-150px + 32px);
+    margin-right: -150px;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {

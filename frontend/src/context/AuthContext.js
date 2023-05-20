@@ -1,37 +1,63 @@
-import {createContext, useReducer, useEffect} from 'react';
+import { createContext, useReducer, useEffect } from 'react';
 
 
 export const AuthContext = createContext();
 
-export const authReducer = function(state, action) {
-    switch(action.type) {
+export const authReducer = function (state, action) {
+    switch (action.type) {
         case 'LOGIN':
             console.log(action.payload);
             return {
-                user: action.payload
+                user: action.payload,
+                randomUsers: null
             }
         case 'LOGOUT':
             return {
-                user: null
+                user: null,
+                randomUsers: null
             }
         case 'UPDATE_USER':
             return {
-                user: action.payload
+                user: action.payload,
+                randomUsers: null
             }
+        case 'RANDOM_USERS':
+            return {
+                ...state,
+                randomUsers: action.payload
+            }
+            case 'FOLLOW_USER':
+                const following = Array.isArray(state.user.following)
+                    ? [...state.user.following, action.payload]
+                    : [action.payload];
+            
+                return {
+                    ...state,
+                    user: {
+                        ...state.user,
+                        following: following
+                    }
+                }
+            case 'GET_USER':
+                return {
+                    ...state,
+                    user: action.payload
+                }
         default:
             return state;
     }
 }
 
-export const AuthContextProvider = ({children}) => {
+export const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, {
-        user: null
+        user: null,
+        randomUsers: null
     });
-    
+
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
 
-        if(user) {
+        if (user) {
             dispatch({
                 type: 'LOGIN',
                 payload: user
@@ -39,9 +65,9 @@ export const AuthContextProvider = ({children}) => {
         }
     }, [])
 
-    return(
-    <AuthContext.Provider value={{...state, dispatch}}>
-        {children}
+    return (
+        <AuthContext.Provider value={{ ...state, dispatch }}>
+            {children}
         </AuthContext.Provider>
     )
 }

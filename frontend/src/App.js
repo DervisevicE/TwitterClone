@@ -42,8 +42,7 @@ function App() {
           </Routes>
         {/* </DataProvider> */}
       </div>
-      {user && <RightBar className="right" tweets={tweets} />}
-      {/* {!isLoginPage && !isSignupPage && <RightBar className="right" tweets={tweets} />} */}
+      {user && <RightBar className="right" />}
     </div>
   );
 }

@@ -1,44 +1,79 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './ProfilePage.css'
 import Avatar from '../../components/Avatar/Avatar';
-import Notification from '../../components/Notification/Notification';
 import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { apiURL } from '../../constants';
 import { useTweetsContext } from '../../hooks/useTweetsContext';
 import Tweet from '../../components/Tweet/Tweet';
+import Suggestion from '../../components/Suggestion/Suggestion';
 
 
 const ProfilePage = () => {
 
     const [isEditing, setIsEditing] = useState(false);
-    const { user, dispatch } = useAuthContext();
+    const { user, randomUsers, dispatch } = useAuthContext();
     const { tweets } = useTweetsContext();
-
 
     const createdAtDate = new Date(user.createdAt);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = createdAtDate.toLocaleDateString('en-US', options);
 
     const fetchTweets = async () => {
-        const response = await fetch(apiURL + '/tweets', {
-            headers: { 'Authorization': `Bearer ${user.token}` },
-        })
-        const json = await response.json()
-
-        if (response.ok) {
-            dispatch({ type: 'SET_TWEETS', payload: json })
+        if(user && user.token){
+            const response = await fetch(apiURL + '/tweets/me/', {
+                headers: { 'Authorization': `Bearer ${user.token}` },
+            })
+            const json = await response.json()
+    
+            if (response.ok) {
+                dispatch({ type: 'SET_TWEETS', payload: json })
+            }
         }
     }
 
-    if (user) {
-        fetchTweets()
-    }
 
     const handleEditProfile = () => {
         setIsEditing(true);
     };
+
+
+    useEffect(() => {
+        const fetchRandomUsers = async () => {
+
+            if (user && user.token) {
+                const response = await fetch(apiURL + '/user/random', {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                })
+                const json = await response.json()
+
+                if (response.ok) {
+                    dispatch({ type: 'RANDOM_USERS', payload: json })
+                }
+            }
+
+        }
+
+        const getUser = async () => {
+            if (user && user.token) {
+                const response = await fetch(apiURL + '/user/', {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                })
+                const json = await response.json()
+
+                if (response.ok) {
+                    dispatch({ type: 'GET_USER', payload: json })
+                }
+            }
+        }
+
+
+        fetchRandomUsers()
+        getUser()
+        fetchTweets()
+
+    }, [user])
 
     return (
         <div className='profile_page fade-in'>
@@ -70,9 +105,9 @@ const ProfilePage = () => {
             </div>
             <div className="suggestions">
                 <h2 className='title'>Who to follow?</h2>
-                <Notification />
-                <Notification />
-                {/* Add more suggestions here */}
+                {randomUsers && randomUsers.map(user => {
+                    return <Suggestion key={user._id} user={user} />
+                })}
             </div>
 
             {isEditing && <EditProfileForm setIsEditing={setIsEditing} />}

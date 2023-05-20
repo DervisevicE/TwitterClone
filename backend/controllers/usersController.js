@@ -131,8 +131,8 @@ const getFollowing = async (req, res) => {
 }
 
 const followUser = async (req, res) => {
-    const { id } = req.params
-    const { followId } = req.body
+    const  id  = req.user._id
+    const { followId } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such user' })
@@ -188,7 +188,7 @@ const unfollowUser = async (req, res) => {
     }
 
     user.following = user.following.filter((follows) => follows._id !== unfollow._id)
-    
+
     unfollow.followers = unfollow.followers.filter((follows) => follows._id !== unfollow._id)
 
     await user.save()
@@ -196,6 +196,26 @@ const unfollowUser = async (req, res) => {
 
     res.status(200).json({ message: 'User unfollowed successfully' })
 }
+
+
+const getRandomUsers = async (req, res) => {
+    const id = req.user._id;
+
+    try {
+        const user = await User.findById(id);
+        const followingIds = user.following.map((follow) => follow._id);
+
+        const randomUsers = await User.aggregate([
+            { $match: { _id: { $ne: id, $nin: followingIds } } },
+            { $sample: { size: 5 } }
+        ]);
+
+        res.status(200).json(randomUsers);
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching random users' });
+    }
+};
+
 
 module.exports = {
     signupUser,
@@ -206,5 +226,6 @@ module.exports = {
     getFollowers,
     getFollowing,
     followUser,
-    unfollowUser
+    unfollowUser,
+    getRandomUsers
 }
