@@ -109,8 +109,6 @@ const Tweet = (props) => {
             })
         }
     },[])
-
-    console.log(author)
     
 
     return (

@@ -5,7 +5,6 @@ import Avatar from '../../components/Avatar/Avatar';
 import EditProfileForm from '../../components/EditProfileForm/EditProfileForm';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { apiURL } from '../../constants';
-import { useTweetsContext } from '../../hooks/useTweetsContext';
 import Tweet from '../../components/Tweet/Tweet';
 import Suggestion from '../../components/Suggestion/Suggestion';
 
@@ -14,7 +13,6 @@ const ProfilePage = () => {
 
     const [isEditing, setIsEditing] = useState(false);
     const { user, randomUsers, dispatch } = useAuthContext();
-    const { tweets } = useTweetsContext();
     const [userTweets, setUserTweets] = useState([]);
 
     const createdAtDate = new Date(user.createdAt);

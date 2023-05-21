@@ -49,6 +49,24 @@ const getUserTweets = async (req, res) => {
     }
 };
 
+getTweetsByAuthorId = async (req, res) => {
+    const id = req.user._id;
+    const { authorId } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such user' })
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(authorId)) {
+        return res.status(404).json({ error: 'No such user' })
+    }
+
+    const tweets = await Tweet.find({ author: authorId }).sort({ createdAt: -1 })
+
+    res.status(200).json(tweets)
+}
+
+
 
 // post new tweet
 const createTweet = async (req, res) => {
@@ -103,5 +121,6 @@ module.exports = {
     getTweets,
     getUserTweets,
     deleteTweet,
-    updateTweet
+    updateTweet,
+    getTweetsByAuthorId
 }
