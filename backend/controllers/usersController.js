@@ -83,7 +83,7 @@ const deleteUser = async (req, res) => {
 }
 
 const getFollowers = async (req, res) => {
-    const { id } = req.params
+    const id = req.user._id
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such user' })
@@ -106,7 +106,7 @@ const getFollowers = async (req, res) => {
 }
 
 const getFollowing = async (req, res) => {
-    const { id } = req.params
+    const id = req.user._id
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such user' })
@@ -164,38 +164,39 @@ const followUser = async (req, res) => {
 }
 
 const unfollowUser = async (req, res) => {
-    const { id } = req.params
-    const { unfollowId } = req.body
+    const id = req.user._id;
+    const { unfollowId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such user' })
+        return res.status(404).json({ error: 'No such user' });
     }
 
     if (!mongoose.Types.ObjectId.isValid(unfollowId)) {
-        return res.status(404).json({ error: 'No such user' })
+        return res.status(404).json({ error: 'No such user' });
     }
 
-    const user = await User.findById({ _id: id })
+    const user = await User.findById({ _id: id });
 
     if (!user) {
-        return res.status(404).json({ error: 'No such user' })
+        return res.status(404).json({ error: 'No such user' });
     }
 
-    const unfollow = await User.findById({ _id: id })
+    const unfollow = await User.findById({ _id: unfollowId });
 
     if (!unfollow) {
-        return res.status(404).json({ error: 'No such user' })
+        return res.status(404).json({ error: 'No such user' });
     }
 
-    user.following = user.following.filter((follows) => follows._id !== unfollow._id)
+    user.following = user.following.filter((follows) => follows._id.toString() !== unfollowId);
 
-    unfollow.followers = unfollow.followers.filter((follows) => follows._id !== unfollow._id)
+    unfollow.followers = unfollow.followers.filter((follows) => follows._id.toString() !== id);
 
-    await user.save()
-    await unfollow.save()
+    await user.save();
+    await unfollow.save();
 
-    res.status(200).json({ message: 'User unfollowed successfully' })
-}
+    res.status(200).json({ message: 'User unfollowed successfully' });
+};
+
 
 
 const getRandomUsers = async (req, res) => {

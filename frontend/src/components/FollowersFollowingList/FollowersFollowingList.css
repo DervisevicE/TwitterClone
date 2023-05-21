@@ -1,0 +1,77 @@
+.following,
+.followers {
+    width: auto;
+    height: fit-content;
+    padding: 16px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f7f9f9;
+
+}
+
+.list_heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: auto;
+}
+
+.following_item,
+.follower_item {
+    width: 300px;
+    background-color: #f7f9f9;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.follower_item:hover,
+.following_item:hover {
+    background-color: #e7e7e8;
+}
+
+.name_bold {
+    font-weight: bold;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.names {
+    padding-left: 12px;
+    padding: 10px;
+    margin: auto;
+}
+
+.unfollow_btn {
+    background-color: #e7e7e8;
+    border-radius: 9999px;
+    padding: 12px 20px;
+    cursor: pointer;
+    border: 0.02px solid rgb(134, 133, 133);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.unfollow_btn:hover{
+    background-color: rgb(247, 83, 83, 0.2);
+    color: red;
+    border-color: red;
+    animation-name: transition;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+
+}
+
+.following_item:hover {
+    background-color: #e7e7e8;
+}
+
+.follower_item:hover {
+    background-color: #e7e7e8;
+}

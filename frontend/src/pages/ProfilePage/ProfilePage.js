@@ -7,11 +7,15 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { apiURL } from '../../constants';
 import Tweet from '../../components/Tweet/Tweet';
 import Suggestion from '../../components/Suggestion/Suggestion';
+import FollowersFollowingList from '../../components/FollowersFollowingList/FollowersFollowingList'
 
 
 const ProfilePage = () => {
 
     const [isEditing, setIsEditing] = useState(false);
+    const [showFollowingList, setShowFollowingList] = useState(false)
+    const [showFollowersList, setShowFollowersList] = useState(false)
+    const [selectedList, setSelectedList] = useState(null);
     const { user, randomUsers, dispatch } = useAuthContext();
     const [userTweets, setUserTweets] = useState([]);
     const [userDetails, setUserDetails] = useState(null);
@@ -71,6 +75,15 @@ const ProfilePage = () => {
 
     }, [user])
 
+    const openFollowingList = async () => {
+        setSelectedList('following');
+        setShowFollowingList(true)
+    }
+
+    const openFollowersList = async () => {
+        setSelectedList('followers');
+        setShowFollowersList(true)
+    }
 
     return (
         <div className='profile_page fade-in'>
@@ -88,10 +101,10 @@ const ProfilePage = () => {
                 <button className="edit_profile_btn" onClick={handleEditProfile}>Edit Profile</button>
             </div>
             <div className="follow_counts">
-                <p>
+                <p onClick={openFollowingList}>
                     <span className="follow_count">{userDetails ? userDetails.following.length : 0}</span> Following
                 </p>
-                <p>
+                <p onClick={openFollowersList}>
                     <span className="follow_count">{userDetails ? userDetails.followers.length : 0}</span> Followers
                 </p>
             </div>
@@ -108,6 +121,12 @@ const ProfilePage = () => {
             </div>
 
             {isEditing && <EditProfileForm setIsEditing={setIsEditing} />}
+            {showFollowersList && <FollowersFollowingList setShowFollowersList={setShowFollowersList}
+                setShowFollowingList={setShowFollowingList}
+                selectedList={selectedList} />}
+            {showFollowingList && <FollowersFollowingList setShowFollowersList={setShowFollowersList}
+                setShowFollowingList={setShowFollowingList}
+                selectedList={selectedList} />}
         </div>
     );
 };

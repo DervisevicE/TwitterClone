@@ -38,6 +38,21 @@ export const authReducer = function (state, action) {
                     following: following
                 }
             }
+        case 'UNFOLLOW_USER':
+            const unfollowId = action.payload;
+
+            const updatedFollowing = Array.isArray(state.user.following)
+                ? state.user.following.filter((follows) => follows._id !== unfollowId)
+                : [];
+
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    following: updatedFollowing
+                }
+            };
+
         default:
             return state;
     }

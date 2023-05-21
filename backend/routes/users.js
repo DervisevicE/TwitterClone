@@ -20,16 +20,16 @@ router.patch('/', jwtGuard, updateUserDetails)
 router.delete('/', jwtGuard, deleteUser)
 
 // GET user followers
-router.get('/:id/followers', jwtGuard, getFollowers)
+router.get('/followers', jwtGuard, getFollowers)
 
 // GET user following
-router.get('/:followId/following', jwtGuard, getFollowing)
+router.get('/following', jwtGuard, getFollowing)
 
 // Follow user
 router.post('/:followId/follow', jwtGuard, followUser)
 
 // Unfollow user
-router.post('/:id/unfollow', jwtGuard, unfollowUser)
+router.post('/:unfollowId/unfollow', jwtGuard, unfollowUser)
 
 router.get('/random', jwtGuard, getRandomUsers);
 
