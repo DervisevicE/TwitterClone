@@ -14,6 +14,7 @@ const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
     const { user, randomUsers, dispatch } = useAuthContext();
     const [userTweets, setUserTweets] = useState([]);
+    const [userDetails, setUserDetails] = useState(null);
 
     const createdAtDate = new Date(user.createdAt);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -47,7 +48,7 @@ const ProfilePage = () => {
                 const json = await response.json()
 
                 if (response.ok) {
-                    dispatch({ type: 'GET_USER', payload: json })
+                    setUserDetails(json)
                 }
             }
         }
@@ -67,9 +68,9 @@ const ProfilePage = () => {
         fetchRandomUsers()
         getUser()
         fetchTweets()
-        console.log(userTweets)
 
     }, [user])
+
 
     return (
         <div className='profile_page fade-in'>
@@ -88,10 +89,10 @@ const ProfilePage = () => {
             </div>
             <div className="follow_counts">
                 <p>
-                    <span className="follow_count">{user.following?.length ?? 0}</span> Following
+                    <span className="follow_count">{userDetails ? userDetails.following.length : 0}</span> Following
                 </p>
                 <p>
-                    <span className="follow_count">{user.followers?.length ?? 0}</span> Followers
+                    <span className="follow_count">{userDetails ? userDetails.followers.length : 0}</span> Followers
                 </p>
             </div>
             <div className="tweets">
