@@ -15,29 +15,15 @@ const ProfilePage = () => {
     const [isEditing, setIsEditing] = useState(false);
     const { user, randomUsers, dispatch } = useAuthContext();
     const { tweets } = useTweetsContext();
+    const [userTweets, setUserTweets] = useState([]);
 
     const createdAtDate = new Date(user.createdAt);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = createdAtDate.toLocaleDateString('en-US', options);
 
-    const fetchTweets = async () => {
-        if(user && user.token){
-            const response = await fetch(apiURL + '/tweets/me/', {
-                headers: { 'Authorization': `Bearer ${user.token}` },
-            })
-            const json = await response.json()
-    
-            if (response.ok) {
-                dispatch({ type: 'SET_TWEETS', payload: json })
-            }
-        }
-    }
-
-
     const handleEditProfile = () => {
         setIsEditing(true);
     };
-
 
     useEffect(() => {
         const fetchRandomUsers = async () => {
@@ -68,10 +54,22 @@ const ProfilePage = () => {
             }
         }
 
+        const fetchTweets = async () => {
+            if (user && user.token) {
+                fetch(apiURL + `/tweets/me`, {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                }).then(value => {
+                    value.json().then(tweet => {
+                        setUserTweets(tweet);
+                    })
+                })
+            }
+        };
 
         fetchRandomUsers()
         getUser()
         fetchTweets()
+        console.log(userTweets)
 
     }, [user])
 
@@ -99,7 +97,7 @@ const ProfilePage = () => {
                 </p>
             </div>
             <div className="tweets">
-                {tweets && tweets.map((tweet) => (
+                {userTweets && userTweets.map((tweet) => (
                     <Tweet key={tweet._id} tweet={tweet} />
                 ))}
             </div>

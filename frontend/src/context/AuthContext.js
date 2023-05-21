@@ -26,23 +26,18 @@ export const authReducer = function (state, action) {
                 ...state,
                 randomUsers: action.payload
             }
-            case 'FOLLOW_USER':
-                const following = Array.isArray(state.user.following)
-                    ? [...state.user.following, action.payload]
-                    : [action.payload];
-            
-                return {
-                    ...state,
-                    user: {
-                        ...state.user,
-                        following: following
-                    }
+        case 'FOLLOW_USER':
+            const following = Array.isArray(state.user.following)
+                ? [...state.user.following, action.payload]
+                : [action.payload];
+
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    following: following
                 }
-            case 'GET_USER':
-                return {
-                    ...state,
-                    user: action.payload
-                }
+            }
         default:
             return state;
     }

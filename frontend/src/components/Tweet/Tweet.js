@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "../Avatar/Avatar";
 import './Tweet.css'
 import like from '../../assets/like.png';
@@ -18,8 +18,6 @@ const Tweet = (props) => {
     const { dispatch } = useLikesContext();
     const { comments, commentsDispatch } = useCommentsContext()
 
-
-
     const userLiked = props.tweet.likes.find(like => like.user === user._id)
 
     const [likeId, setLikeId] = useState(props.tweet.likes.find(like => like.user === user._id));
@@ -27,6 +25,7 @@ const Tweet = (props) => {
     const [isClicked, setIsClicked] = useState(userLiked);
     const [likeLoading, setLikeLoading] = useState(false);
     const [showComments, setShowComments] = useState(false)
+    const [author, setAuthor] = useState('')
 
 
 
@@ -99,12 +98,27 @@ const Tweet = (props) => {
         }
     };
 
+    useEffect(() => {
+        if (user && user.token) {
+            fetch(apiURL + `/user/${props.tweet.author}/`, {
+                headers: { 'Authorization': `Bearer ${user.token}` },
+            }).then(value => {
+                value.json().then(author => {
+                    setAuthor(author.username);
+                })
+            })
+        }
+    },[])
+
+    console.log(author)
+    
+
     return (
         <div className={`tweet ${!showComments ? 'tweet-hover' : ''}`}>
             <div className="user_details">
                 <Avatar />
-                <p className="username_bold">{user?.username}</p>
-                <p className="username">{user?.username}</p>
+                <p className="username_bold">{author}</p>
+                <p className="username">{author}</p>
             </div>
             <p className="content"> {props.tweet.content}
             </p>

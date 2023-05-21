@@ -131,7 +131,7 @@ const getFollowing = async (req, res) => {
 }
 
 const followUser = async (req, res) => {
-    const  id  = req.user._id
+    const id = req.user._id
     const { followId } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -217,6 +217,33 @@ const getRandomUsers = async (req, res) => {
 };
 
 
+const getUserById = async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user._id;
+
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({ error: 'No such user' })
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(404).json({ error: 'No such user' })
+        }
+
+
+        const user = await User.findById({ _id: id })
+
+        if (!user) {
+            return res.status(404).json({ error: 'No such user' })
+        }
+        res.status(202).json(user)
+
+
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching random users' });
+    }
+}
+
 module.exports = {
     signupUser,
     loginUser,
@@ -227,5 +254,6 @@ module.exports = {
     getFollowing,
     followUser,
     unfollowUser,
-    getRandomUsers
+    getRandomUsers,
+    getUserById
 }

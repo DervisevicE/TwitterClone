@@ -1,5 +1,5 @@
 const express = require('express')
-const {signupUser, loginUser, getUser, updateUserDetails, deleteUser, getFollowers, getFollowing, followUser, unfollowUser, getRandomUsers} = require('../controllers/usersController')
+const {signupUser, loginUser, getUser, updateUserDetails, deleteUser, getFollowers, getFollowing, followUser, unfollowUser, getRandomUsers, getUserById} = require('../controllers/usersController')
 const User = require('../models/userModel')
 const jwtGuard = require('../middleware/auth')
 const router = express.Router()
@@ -32,5 +32,7 @@ router.post('/:followId/follow', jwtGuard, followUser)
 router.post('/:id/unfollow', jwtGuard, unfollowUser)
 
 router.get('/random', jwtGuard, getRandomUsers);
+
+router.get('/:id', jwtGuard, getUserById)
 
 module.exports = router
