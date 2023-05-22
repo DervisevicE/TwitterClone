@@ -20,14 +20,13 @@ const ProfilePage = () => {
     const [userTweets, setUserTweets] = useState([]);
     const [userDetails, setUserDetails] = useState(null);
 
-    const createdAtDate = new Date(userDetails.createdAt);
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = createdAtDate.toLocaleDateString('en-US', options);
-
     const handleEditProfile = () => {
         setIsEditing(true);
     };
 
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = userDetails && userDetails.createdAt ? new Date(userDetails.createdAt).toLocaleDateString('en-US', options) : '';
+    
     useEffect(() => {
         const fetchRandomUsers = async () => {
 
@@ -72,6 +71,8 @@ const ProfilePage = () => {
         fetchRandomUsers()
         getUser()
         fetchTweets()
+
+        
 
     }, [user])
 
