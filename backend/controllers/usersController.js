@@ -197,8 +197,6 @@ const unfollowUser = async (req, res) => {
     res.status(200).json({ message: 'User unfollowed successfully' });
 };
 
-
-
 const getRandomUsers = async (req, res) => {
     const id = req.user._id;
 
@@ -208,10 +206,15 @@ const getRandomUsers = async (req, res) => {
 
         const randomUsers = await User.aggregate([
             { $match: { _id: { $ne: id, $nin: followingIds } } },
-            { $sample: { size: 5 } }
+            { $sample: { size: 5 } },
         ]);
 
-        res.status(200).json(randomUsers);
+        const randomFilteredUsers = randomUsers.filter(
+            (user) => user._id.toString() !== id && !followingIds.includes(user._id)
+        );
+
+        console.log(randomFilteredUsers);
+        res.status(200).json(randomFilteredUsers);
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching random users' });
     }
