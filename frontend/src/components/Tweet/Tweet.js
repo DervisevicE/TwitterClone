@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Avatar from "../Avatar/Avatar";
 import './Tweet.css'
 import like from '../../assets/like.png';
@@ -26,7 +26,6 @@ const Tweet = (props) => {
     const [likeLoading, setLikeLoading] = useState(false);
     const [showComments, setShowComments] = useState(false)
     const [author, setAuthor] = useState('')
-
 
 
     const updateLikesHandler = async () => {
@@ -108,8 +107,8 @@ const Tweet = (props) => {
                 })
             })
         }
-    },[])
-    
+    }, [])
+
 
     return (
         <div className={`tweet ${!showComments ? 'tweet-hover' : ''}`}>
@@ -125,7 +124,7 @@ const Tweet = (props) => {
                 <div onClick={showCommentsHandler}><img src={comment} alt="comment" /> </div> <p>{props.tweet.comments.length}</p>
                 <div><img src={repost} alt="repost" /> </div> <p>{props.tweet.reposts.length}</p>
             </div>
-            {showComments && <CommentForm tweetId={props.tweet._id} />}
+            {showComments && <CommentForm setShowComments={setShowComments} tweetId={props.tweet._id} />}
             {showComments &&
                 comments &&
                 comments.map((comment) => (
