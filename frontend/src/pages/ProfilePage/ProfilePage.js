@@ -20,7 +20,7 @@ const ProfilePage = () => {
     const [userTweets, setUserTweets] = useState([]);
     const [userDetails, setUserDetails] = useState(null);
 
-    const createdAtDate = new Date(user.createdAt);
+    const createdAtDate = new Date(userDetails.createdAt);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = createdAtDate.toLocaleDateString('en-US', options);
 
