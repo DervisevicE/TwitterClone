@@ -5,6 +5,7 @@ const User = require('../models/userModel')
 // get all tweets
 const getTweets = async (req, res) => {
     const userId = req.user;
+    const { id, authorId } = req.query
 
     if (!mongoose.Types.ObjectId.isValid(userId._id)) {
         return res.status(404).json({ error: 'No such user' })
@@ -16,9 +17,29 @@ const getTweets = async (req, res) => {
         return res.status(404).json({ error: 'No such user' })
     }
 
-    const tweets = await Tweet.find({
-        author: { $in: [...user.following, userId._id] }
-    }).sort({ createdAt: -1 })
+    let tweets = []
+
+    if (id) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({ error: 'No such tweet' })
+        }
+
+        tweets = await Tweet.findById(id)
+    } else if (authorId) {
+        if (!mongoose.Types.ObjectId.isValid(authorId)) {
+            return res.status(404).json({ error: 'No such user' })
+        }
+        tweets = await Tweet.find({ author: authorId }).sort({ createdAt: -1 })
+    }
+    else {
+        tweets = await Tweet.find({
+            author: { $in: [...user.following, userId._id] }
+        }).sort({ createdAt: -1 })
+    }
+
+    if (!tweets) {
+        return res.status(404).json({ error: 'No such tweet' })
+    }
 
     res.status(200).json(tweets)
 }
@@ -48,25 +69,6 @@ const getUserTweets = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
-
-getTweetsByAuthorId = async (req, res) => {
-    const id = req.user._id;
-    const { authorId } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such user' })
-    }
-
-    if (!mongoose.Types.ObjectId.isValid(authorId)) {
-        return res.status(404).json({ error: 'No such user' })
-    }
-
-    const tweets = await Tweet.find({ author: authorId }).sort({ createdAt: -1 })
-
-    res.status(200).json(tweets)
-}
-
-
 
 // post new tweet
 const createTweet = async (req, res) => {
@@ -116,11 +118,13 @@ const updateTweet = async (req, res) => {
 }
 
 
+
 module.exports = {
     createTweet,
     getTweets,
     getUserTweets,
     deleteTweet,
     updateTweet,
-    getTweetsByAuthorId
-}
+};
+
+

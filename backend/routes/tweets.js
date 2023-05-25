@@ -1,19 +1,16 @@
 const express = require('express')
 
-const { createTweet, getTweets, getUserTweets, deleteTweet, updateTweet, getTweetsByAuthorId } = require('../controllers/tweetsController')
+const { createTweet, getTweets, getUserTweets, deleteTweet, updateTweet } = require('../controllers/tweetsController')
 
 const Tweet = require('../models/tweetModel')
 const router = express.Router()
 
 
-// GET all tweets
+// GET all tweets, get tweets by id, get tweets by authorId
 router.get('/', getTweets)
 
 //GET user's tweets
 router.get('/me', getUserTweets)
-
-//GET tweets by author id
-router.get('/:authorId', getTweetsByAuthorId)
 
 // POST new tweet
 router.post('/', createTweet)
@@ -26,8 +23,5 @@ router.patch('/:id', updateTweet)
 router.patch('/:id', (req, res) => {
     res.json({ mssg: 'UPDATE tweet' })
 })
-
-
-
 
 module.exports = router;

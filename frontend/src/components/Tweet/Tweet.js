@@ -5,27 +5,37 @@ import like from '../../assets/like.png';
 import liked from '../../assets/liked.png';
 import comment from '../../assets/comment.png';
 import repost from '../../assets/repost.png';
+import bookmark from '../../assets/bookmark.png';
+import bookmarked from '../../assets/bookmarked.png';
 import { apiURL } from "../../constants";
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLikesContext } from '../../hooks/useLikesContext';
 import CommentForm from "../CommentForm/CommentForm";
 import Comment from "../Comment/Comment";
 import { useCommentsContext } from "../../hooks/useCommentsContext";
+import { useBookmarksContext } from "../../hooks/useBookmarksContext";
 
 const Tweet = (props) => {
 
     const { user } = useAuthContext();
     const { dispatch } = useLikesContext();
     const { comments, commentsDispatch } = useCommentsContext()
+    const { bookmarkDispatch } = useBookmarksContext()
 
     const userLiked = props.tweet.likes.find(like => like.user === user._id)
+    const userBookmarked = props.tweet.bookmarks.find(bookmark => bookmark.user === user._id)
 
     const [likeId, setLikeId] = useState(props.tweet.likes.find(like => like.user === user._id));
     const [likesNumber, setLikes] = useState(props.tweet.likes.length);
     const [isClicked, setIsClicked] = useState(userLiked);
+
     const [likeLoading, setLikeLoading] = useState(false);
     const [showComments, setShowComments] = useState(false)
     const [author, setAuthor] = useState('')
+
+    const [isBookmarked, setIsBookmarked] = useState(userBookmarked);
+    const [bookmarkId, setBookmarkId] = useState(props.tweet.bookmarks.find(bookmark => bookmark.user === user._id));
+    const [bookmarkLoading, setBookmarkLoading] = useState(false);
 
 
     const updateLikesHandler = async () => {
@@ -97,6 +107,50 @@ const Tweet = (props) => {
         }
     };
 
+    const bookmarkTweetHandler = async () => {
+        if (bookmarkLoading) {
+            return;
+        }
+        setBookmarkLoading(true);
+        setIsBookmarked(!isBookmarked);
+
+        if (!isBookmarked) {
+            const response = await fetch(apiURL + '/bookmarks', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ tweet: props.tweet._id })
+            })
+
+            const json = await response.json()
+
+            if (response.ok) {
+                bookmarkDispatch({ type: 'SET_BOOKMARKS', payload: json })
+                setBookmarkId(json._id)
+            }
+        }
+
+        else {
+            const response = await fetch(apiURL + `/bookmarks/${bookmarkId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+
+
+            const json = await response.json()
+
+            if (response.ok) {
+                dispatch({ type: 'DElETE_BOOKMARK', payload: json })
+            }
+        }
+        setBookmarkLoading(false);
+    }
+
     useEffect(() => {
         if (user && user.token) {
             fetch(apiURL + `/user/${props.tweet.author}/`, {
@@ -123,6 +177,7 @@ const Tweet = (props) => {
                 <div onClick={updateLikesHandler} disabled={likeLoading}><img src={isClicked ? liked : like} alt="like" /> </div> <p className={isClicked ? "updated" : ""}>{likesNumber}</p>
                 <div onClick={showCommentsHandler}><img src={comment} alt="comment" /> </div> <p>{props.tweet.comments.length}</p>
                 <div><img src={repost} alt="repost" /> </div> <p>{props.tweet.reposts.length}</p>
+                <div onClick={bookmarkTweetHandler}><img src={isBookmarked ? bookmarked : bookmark} alt="repost" /> </div>
             </div>
             {showComments && <CommentForm setShowComments={setShowComments} tweetId={props.tweet._id} />}
             {showComments &&

@@ -5,6 +5,7 @@ const userRoutes = require('./routes/users')
 const commentRoutes = require('./routes/comments')
 const likeRoutes = require('./routes/likes')
 const repostRoutes = require('./routes/reposts')
+const bookmarkRoutes = require('./routes/bookmarks')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const jwtGuard = require('./middleware/auth');
@@ -19,6 +20,7 @@ app.use('/user', userRoutes)
 app.use('/comments', commentRoutes)
 app.use('/likes', jwtGuard, likeRoutes)
 app.use('/reposts', repostRoutes)
+app.use('/bookmarks', jwtGuard, bookmarkRoutes)
 
 app.get('/', function (req, res) {
     res.json({ mssg: "Hello this is working" })

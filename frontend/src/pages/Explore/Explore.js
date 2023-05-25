@@ -26,18 +26,18 @@ const Explore = () => {
 
         randomUsers &&
             randomUsers.forEach(async (author) => {
-                const response = await fetch(apiURL + `/tweets/${author._id}`, {
+                const response = await fetch(apiURL + `/tweets?authorId=${author._id}`, {
                     headers: { 'Authorization': `Bearer ${user.token}` },
                 });
                 const json = await response.json();
 
                 if (response.ok) {
+                    console.log(json);
                     setTweets((prev) => [...prev, ...json]);
                 }
             });
     }, []);
 
-    // Create a uniqueTweets array with unique tweet IDs
     const uniqueTweets = Array.from(new Set(tweets.map((tweet) => tweet._id))).map(
         (id) => tweets.find((tweet) => tweet._id === id)
     );

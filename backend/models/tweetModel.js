@@ -23,6 +23,10 @@ const tweetSchema = new Schema({
     reposts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    }],
+    bookmarks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }]
 }, {timestamps: true})
 
