@@ -1,8 +1,25 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './Comment.css'
 import Avatar from "../Avatar/Avatar";
+import {apiURL} from "../../constants";
+import {useAuthContext} from "../../hooks/useAuthContext";
 
 const Comment = (props) => {
+
+    const [photo, setPhoto] = useState('')
+    const {user} = useAuthContext()
+
+    useEffect(() => {
+        if (user && user.token) {
+            fetch(apiURL + `/user/${props.comment.author}/`, {
+                headers: { 'Authorization': `Bearer ${user.token}` },
+            }).then(value => {
+                value.json().then(author => {
+                    setPhoto(author.profilePicture)
+                })
+            })
+        }
+    }, [])
 
     return (
         <div className="comment">

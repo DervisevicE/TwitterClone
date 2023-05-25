@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './NewPost.css';
 import Avatar from '../Avatar/Avatar';
 import { apiURL } from "../../constants";
@@ -11,6 +11,7 @@ const NewPost = () => {
     const [enteredText, setEnteredText] = useState("");
     const { dispatch } = useTweetsContext();
     const { user } = useAuthContext();
+    const [userDetails, setUserDetails] = useState(null);
 
     const addTweetHandler = async (e) => {
         e.preventDefault();
@@ -33,9 +34,27 @@ const NewPost = () => {
         setEnteredText("");
     }
 
+    useEffect(() => {
+        const getUser = async () => {
+            if (user && user.token) {
+                const response = await fetch(apiURL + '/user/', {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                })
+                const json = await response.json()
+
+                if (response.ok) {
+                    setUserDetails(json)
+                }
+            }
+        }
+        getUser()
+    }, [user])
+
+
+
     return (
         <div className="new_post">
-            <Avatar />
+            <Avatar picture={userDetails ? userDetails.profilePicture : ''}/>
             <form className="new_tweet" onSubmit={addTweetHandler}>
                 <input
                     className="new_post_text"

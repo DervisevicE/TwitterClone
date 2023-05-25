@@ -32,7 +32,6 @@ const Explore = () => {
                 const json = await response.json();
 
                 if (response.ok) {
-                    console.log(json);
                     setTweets((prev) => [...prev, ...json]);
                 }
             });

@@ -86,13 +86,14 @@ const ProfilePage = () => {
         setShowFollowersList(true)
     }
 
+
     return (
         <div className='profile_page fade-in'>
             <div className="title"><h2></h2></div>
 
             <div className='header'>
                 <div className="profile_info">
-                    <Avatar />
+                    <Avatar picture={userDetails ? userDetails.profilePicture : ''} />
                     <div className="user_names">
                         <div className="name_bold">{user.username}</div>
                         <div className="name">{user.username}</div>

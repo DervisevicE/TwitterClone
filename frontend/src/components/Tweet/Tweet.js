@@ -32,6 +32,7 @@ const Tweet = (props) => {
     const [likeLoading, setLikeLoading] = useState(false);
     const [showComments, setShowComments] = useState(false)
     const [author, setAuthor] = useState('')
+    const [photo, setPhoto] = useState('')
 
     const [isBookmarked, setIsBookmarked] = useState(userBookmarked);
     const [bookmarkId, setBookmarkId] = useState(props.tweet.bookmarks.find(bookmark => bookmark.user === user._id));
@@ -158,6 +159,7 @@ const Tweet = (props) => {
             }).then(value => {
                 value.json().then(author => {
                     setAuthor(author.username);
+                    setPhoto(author.profilePicture)
                 })
             })
         }
@@ -167,7 +169,7 @@ const Tweet = (props) => {
     return (
         <div className={`tweet ${!showComments ? 'tweet-hover' : ''}`}>
             <div className="user_details">
-                <Avatar />
+                <Avatar picture={photo}/>
                 <p className="username_bold">{author}</p>
                 <p className="username">{author}</p>
             </div>

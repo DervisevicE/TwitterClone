@@ -25,11 +25,10 @@ const Suggestion = (props) => {
     }
 
 
-
     return (
         <div className="suggestion">
             <div className="details">
-                <Avatar />
+                <Avatar picture={props.user.profilePicture}/>
                 <div className="names">
                     <div className="name_bold">{props.user.username}</div>
                     <div className="name">{props.user.username}</div>

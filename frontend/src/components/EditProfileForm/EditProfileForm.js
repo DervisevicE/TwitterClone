@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './EditProfileForm.css'
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { apiURL } from '../../constants';
+import FileBase from 'react-file-base64';
 
 const EditProfileForm = ({ setIsEditing }) => {
 
@@ -9,6 +10,7 @@ const EditProfileForm = ({ setIsEditing }) => {
 
     const [name, setName] = useState('');
     const [bio, setBio] = useState('');
+    const [photo, setPhoto] = useState('');
 
     const handleNameChange = (e) => {
         setName(e.target.value);
@@ -27,7 +29,7 @@ const EditProfileForm = ({ setIsEditing }) => {
                 'Authorization': `Bearer ${user.token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username: name, bio: bio })
+            body: JSON.stringify({ username: name, bio: bio, profilePicture: photo })
         })
 
         const json = await response.json()
@@ -38,6 +40,7 @@ const EditProfileForm = ({ setIsEditing }) => {
 
         setName('');
         setBio('');
+        setPhoto('');
         setIsEditing(false);
     };
     let editProfileRef = useRef();
@@ -59,6 +62,9 @@ const EditProfileForm = ({ setIsEditing }) => {
             <form className='edit_profile_form' onSubmit={handleSubmit} ref={editProfileRef}>
                 <div className="closeBtn">
                     <button onClick={() => { setIsEditing(false); }}> X </button>
+                </div>
+                <div>
+                    <FileBase type="file" multiple={false} onDone={({ base64 }) => setPhoto(base64)}  />
                 </div>
                 <div>
                     <label htmlFor="name">Name:</label>

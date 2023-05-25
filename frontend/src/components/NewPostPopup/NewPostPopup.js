@@ -11,6 +11,8 @@ const NewPostPopup = ({ setIsTweetAction }) => {
     const { dispatch } = useTweetsContext();
     const { user } = useAuthContext();
 
+    const [userDetails, setUserDetails] = useState(null);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -47,6 +49,23 @@ const NewPostPopup = ({ setIsTweetAction }) => {
             document.removeEventListener("mousedown", handler);
         };
     });
+
+    useEffect(() => {
+        const getUser = async () => {
+            if (user && user.token) {
+                const response = await fetch(apiURL + '/user/', {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                })
+                const json = await response.json()
+
+                if (response.ok) {
+                    setUserDetails(json)
+                }
+            }
+        }
+
+        getUser()
+    }, [user])
     
 
     return (
@@ -56,7 +75,7 @@ const NewPostPopup = ({ setIsTweetAction }) => {
                     <button onClick={() => { setIsTweetAction(false); }}> X </button>
                 </div>
                 <div className="avatar_container">
-                    <Avatar />
+                    <Avatar picture={userDetails ? userDetails.profilePicture : ''}/>
                 </div>
                 <div className="content_container">
                     <input className='new_post_popup_text' placeholder='Test Test' type="text" value={content} onChange={(e) => setContent(e.target.value)} />

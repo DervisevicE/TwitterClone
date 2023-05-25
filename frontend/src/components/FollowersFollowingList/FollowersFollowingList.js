@@ -128,7 +128,7 @@ const FollowersFollowingList = ({ setShowFollowersList, setShowFollowingList, se
                         {followers.map((follower) => (
                             <div key={follower._id} className="follower_item">
                                 <div className="details">
-                                    <Avatar />
+                                    <Avatar picture={follower.profilePicture}/>
                                     <div className="names">
                                         <div className="name_bold">{follower.username}</div>
                                         <div className="name">{follower.username}</div>
@@ -149,7 +149,7 @@ const FollowersFollowingList = ({ setShowFollowersList, setShowFollowingList, se
                         {following.map((follow) => (
                             <div key={follow._id} className="following_item">
                                 <div className="details">
-                                    <Avatar />
+                                    <Avatar picture={follow.profilePicture} />
                                     <div className="names">
                                         <div className="name_bold">{follow.username}</div>
                                         <div className="name">{follow.username}</div>

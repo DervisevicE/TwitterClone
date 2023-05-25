@@ -11,6 +11,7 @@ const CommentForm = (props) => {
     const [comment, setComment] = useState('')
     const { commentsDispatch } = useCommentsContext()
     const { user } = useAuthContext()
+    const [userDetails, setUserDetails] = useState(null)
 
 
     const handleSubmit = async (e) => {
@@ -51,10 +52,27 @@ const CommentForm = (props) => {
         };
     });
 
+    useEffect(() => {
+        const getUser = async () => {
+            if (user && user.token) {
+                const response = await fetch(apiURL + '/user/', {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                })
+                const json = await response.json()
+
+                if (response.ok) {
+                    setUserDetails(json)
+                }
+            }
+        }
+
+        getUser()
+    }, [user])
+
     return (
         <form className='comment_form' ref={commentFormRef} onSubmit={handleSubmit}>
             <div className="avatar_container">
-                <Avatar />
+                <Avatar picture={userDetails ? userDetails.profilePicture: ''}/>
             </div>
             <div className="comment_container">
                 <input className='comment_text' placeholder='Tweet your reply!' type="text" value={comment} onChange={(e) => { setComment(e.target.value) }} />

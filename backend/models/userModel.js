@@ -34,7 +34,7 @@ const userSchema = new Schema({
 }, { timestamps: true })
 
 //static signup method
-userSchema.statics.signup = async function (username, email, password) {
+userSchema.statics.signup = async function (username, email, password, profilePicture) {
 
     if(!email || !password || !username) {
         throw new Error('Please provide email, username and password')
@@ -68,7 +68,7 @@ userSchema.statics.signup = async function (username, email, password) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const user = await this.create({ username, email, password: hash })
+    const user = await this.create({ username, email, password: hash, profilePicture })
 
     return user
 }
