@@ -3,6 +3,7 @@ import Avatar from "../Avatar/Avatar";
 import './Suggestion.css';
 import { apiURL } from "../../constants";
 import { useAuthContext } from '../../hooks/useAuthContext';
+import {Link} from 'react-router-dom';
 
 
 const Suggestion = (props) => {
@@ -27,13 +28,13 @@ const Suggestion = (props) => {
 
     return (
         <div className="suggestion">
-            <div className="details">
+            <Link to={`/profile/${props.user._id}`}  className="details">
                 <Avatar picture={props.user.profilePicture}/>
                 <div className="names">
                     <div className="name_bold">{props.user.username}</div>
                     <div className="name">{props.user.username}</div>
                 </div>
-            </div>
+            </Link>
             <button className="follow_btn" onClick={handleFollow} >Follow</button>
         </div>
     );

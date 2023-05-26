@@ -14,6 +14,7 @@ import CommentForm from "../CommentForm/CommentForm";
 import Comment from "../Comment/Comment";
 import { useCommentsContext } from "../../hooks/useCommentsContext";
 import { useBookmarksContext } from "../../hooks/useBookmarksContext";
+import { Link } from "react-router-dom";
 
 const Tweet = (props) => {
 
@@ -168,11 +169,11 @@ const Tweet = (props) => {
 
     return (
         <div className={`tweet ${!showComments ? 'tweet-hover' : ''}`}>
-            <div className="user_details">
+            <Link to={`/profile/${props.tweet.author}`} className="user_details">
                 <Avatar picture={photo}/>
                 <p className="username_bold">{author}</p>
                 <p className="username">{author}</p>
-            </div>
+            </Link>
             <p className="content"> {props.tweet.content}
             </p>
             <div className="interactions">

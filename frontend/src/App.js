@@ -39,6 +39,7 @@ function App() {
             <Route path='/notifications' element={user ? <Notifications /> : <Navigate to='/login' />} />
             <Route path='/bookmarks' element={user ? <Bookmarks /> : <Navigate to='/login' />} />
             <Route path='/profile' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
+            <Route path='/profile/:userId' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
           </Routes>
         {/* </DataProvider> */}
       </div>

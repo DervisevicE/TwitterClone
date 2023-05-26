@@ -11,6 +11,8 @@
 
 .user_details {
   display: flex;
+  color: black;
+  text-decoration: none;
 }
 
 .tweet .avatar {

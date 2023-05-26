@@ -61,7 +61,7 @@ const LeftBar = () => {
                 </div>
             </Link>
 
-            <Link className="router_links" to='profile'>
+            <Link className="router_links" to={'profile'}>
                 <div className="item">
                     <div className="icon"> <img src={profile} alt="profile" /></div>
                     <div className="text">Profile </div>

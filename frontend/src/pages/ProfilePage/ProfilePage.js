@@ -8,6 +8,7 @@ import { apiURL } from '../../constants';
 import Tweet from '../../components/Tweet/Tweet';
 import Suggestion from '../../components/Suggestion/Suggestion';
 import FollowersFollowingList from '../../components/FollowersFollowingList/FollowersFollowingList'
+import { useParams } from 'react-router-dom';
 
 
 const ProfilePage = () => {
@@ -19,6 +20,11 @@ const ProfilePage = () => {
     const { user, randomUsers, dispatch } = useAuthContext();
     const [userTweets, setUserTweets] = useState([]);
     const [userDetails, setUserDetails] = useState(null);
+    const [loggedInUserDetails, setLoggedInUserDetails] = useState(null);
+
+    const { userId } = useParams();
+    console.log(userId)
+
 
     const handleEditProfile = () => {
         setIsEditing(true);
@@ -26,7 +32,9 @@ const ProfilePage = () => {
 
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = userDetails && userDetails.createdAt ? new Date(userDetails.createdAt).toLocaleDateString('en-US', options) : '';
+
     
+
     useEffect(() => {
         const fetchRandomUsers = async () => {
 
@@ -43,6 +51,49 @@ const ProfilePage = () => {
 
         }
 
+        const getUserById = async () => {
+            if (userId && user && user.token) {
+                console.log("I AM HEREEEE")
+                fetch(apiURL + `/user/${userId}/`, {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                }).then(value => {
+                    value.json().then(author => {
+                        setUserDetails(author);
+                    })
+                })
+            }
+        }
+    
+        const fetchTweetsByAuthor = async () => {
+            if (userId && user && user.token) {
+                const response = await fetch(apiURL + `/tweets?authorId=${userId}`, {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                });
+                const json = await response.json();
+    
+                if (response.ok) {
+                    if (json.length === 0) {
+                        setUserTweets([]);
+                    } else {
+                        setUserTweets(json);
+                    }
+                }
+            }
+        }
+
+        const getUserDetails = async () => {
+            if (user && user.token) {
+                const response = await fetch(apiURL + '/user/', {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                })
+                const json = await response.json()
+
+                if (response.ok) {
+                    setLoggedInUserDetails(json)
+                }
+            }
+        }
+
         const getUser = async () => {
             if (user && user.token) {
                 const response = await fetch(apiURL + '/user/', {
@@ -56,6 +107,7 @@ const ProfilePage = () => {
             }
         }
 
+
         const fetchTweets = async () => {
             if (user && user.token) {
                 fetch(apiURL + `/tweets/me`, {
@@ -68,13 +120,20 @@ const ProfilePage = () => {
             }
         };
 
+
         fetchRandomUsers()
-        getUser()
-        fetchTweets()
+        getUserDetails()
+        if (!userId) {
+            getUser()
+            fetchTweets()
+        } else {
+            getUserById()
+            fetchTweetsByAuthor()
+        }
 
-        
 
-    }, [user])
+
+    }, [user, userId])
 
     const openFollowingList = async () => {
         setSelectedList('following');
@@ -95,12 +154,12 @@ const ProfilePage = () => {
                 <div className="profile_info">
                     <Avatar picture={userDetails ? userDetails.profilePicture : ''} />
                     <div className="user_names">
-                        <div className="name_bold">{user.username}</div>
-                        <div className="name">{user.username}</div>
+                        <div className="name_bold">{userDetails ? userDetails.username : ''}</div>
+                        <div className="name">{userDetails ? userDetails.username : ''}</div>
                     </div>
                     <p className="created_at">{formattedDate}</p>
                 </div>
-                <button className="edit_profile_btn" onClick={handleEditProfile}>Edit Profile</button>
+                {userDetails && userDetails._id === loggedInUserDetails._id &&  (<button className="edit_profile_btn" onClick={handleEditProfile}>Edit Profile</button>)}
             </div>
             <div className="follow_counts">
                 <p onClick={openFollowingList}>
