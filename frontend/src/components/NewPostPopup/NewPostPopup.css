@@ -8,6 +8,7 @@
     flex-direction: column;
     justify-content: space-between;
     transition: 500ms ease;
+    z-index: 3002;
 }
 
 .closeBtn {
