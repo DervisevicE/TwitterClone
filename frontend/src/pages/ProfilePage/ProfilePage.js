@@ -21,9 +21,9 @@ const ProfilePage = () => {
     const [userTweets, setUserTweets] = useState([]);
     const [userDetails, setUserDetails] = useState(null);
     const [loggedInUserDetails, setLoggedInUserDetails] = useState(null);
+    const [following, setFollowing] = useState([]);
 
     const { userId } = useParams();
-    console.log(userId)
 
 
     const handleEditProfile = () => {
@@ -33,7 +33,7 @@ const ProfilePage = () => {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = userDetails && userDetails.createdAt ? new Date(userDetails.createdAt).toLocaleDateString('en-US', options) : '';
 
-    
+
 
     useEffect(() => {
         const fetchRandomUsers = async () => {
@@ -53,7 +53,6 @@ const ProfilePage = () => {
 
         const getUserById = async () => {
             if (userId && user && user.token) {
-                console.log("I AM HEREEEE")
                 fetch(apiURL + `/user/${userId}/`, {
                     headers: { 'Authorization': `Bearer ${user.token}` },
                 }).then(value => {
@@ -63,14 +62,14 @@ const ProfilePage = () => {
                 })
             }
         }
-    
+
         const fetchTweetsByAuthor = async () => {
             if (userId && user && user.token) {
                 const response = await fetch(apiURL + `/tweets?authorId=${userId}`, {
                     headers: { 'Authorization': `Bearer ${user.token}` },
                 });
                 const json = await response.json();
-    
+
                 if (response.ok) {
                     if (json.length === 0) {
                         setUserTweets([]);
@@ -135,6 +134,27 @@ const ProfilePage = () => {
 
     }, [user, userId])
 
+    useEffect(() => {
+
+        const fetchFollowing = async () => {
+            if (user && user.token) {
+                const response = await fetch(apiURL + `/user/following`, {
+                    headers: { 'Authorization': `Bearer ${user.token}` },
+                })
+                const json = await response.json()
+
+                if (response.ok) {
+                    setFollowing(json)
+                }
+            }
+        }
+
+        fetchFollowing()
+    }, [user])
+
+
+
+
     const openFollowingList = async () => {
         setSelectedList('following');
         setShowFollowingList(true)
@@ -145,6 +165,49 @@ const ProfilePage = () => {
         setShowFollowersList(true)
     }
 
+    const handleFollow = async (followId) => {
+        try {
+            const response = await fetch(apiURL + `/user/${followId}/follow`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const json = await response.json();
+
+            if (response.ok) {
+                setFollowing(prevFollowing => [...prevFollowing, followId]);
+                dispatch({ type: 'FOLLOW_USER', payload: followId });
+            }
+        } catch (error) {
+            console.error('Error handling follow:', error);
+        }
+    };
+
+    const handleUnfollow = async (unfollowId) => {
+        try {
+            const response = await fetch(apiURL + `/user/${unfollowId}/unfollow`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            const json = await response.json();
+
+            if (response.ok) {
+                setFollowing(prevFollowing => prevFollowing.filter(follow => follow !== unfollowId));
+                dispatch({ type: 'UNFOLLOW_USER', payload: unfollowId });
+            }
+        } catch (error) {
+            console.error('Error handling unfollow:', error);
+        }
+    };
+
+
+
+    const isUserFollowing = loggedInUserDetails?.following.includes(userId)
 
     return (
         <div className='profile_page fade-in'>
@@ -159,7 +222,20 @@ const ProfilePage = () => {
                     </div>
                     <p className="created_at">{formattedDate}</p>
                 </div>
-                {userDetails && userDetails._id === loggedInUserDetails._id &&  (<button className="edit_profile_btn" onClick={handleEditProfile}>Edit Profile</button>)}
+                {userDetails && userDetails._id === loggedInUserDetails._id && (<button className="edit_profile_btn" onClick={handleEditProfile}>Edit Profile</button>)}
+
+
+                {userDetails && userDetails._id !== loggedInUserDetails._id && (
+                    <>
+                        {isUserFollowing ? (
+                            <button className='unfollow_btn' onClick={() => handleUnfollow(userId)}>Unfollow</button>
+                        ) : (
+                            <button className='follow_btn' onClick={() => handleFollow(userId)}>Follow</button>
+                        )}
+                    </>
+                )}
+
+
             </div>
             <div className="follow_counts">
                 <p onClick={openFollowingList}>
