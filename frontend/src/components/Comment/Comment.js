@@ -8,6 +8,7 @@ const Comment = (props) => {
 
     const [photo, setPhoto] = useState('')
     const {user} = useAuthContext()
+    console.log(props.comment.author)
 
     useEffect(() => {
         if (user && user.token) {
@@ -23,7 +24,7 @@ const Comment = (props) => {
 
     return (
         <div className="comment">
-            <Avatar />
+            <Avatar picture={photo}/>
             <div className="comment_content">
                 <p>{props.comment.content}t</p>
             </div>
