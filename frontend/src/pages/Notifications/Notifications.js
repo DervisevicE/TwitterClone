@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './Notifications.css';
 import Notification from "../../components/Notification/Notification";
-import LeftBar from "../../components/LeftBar/LeftBar";
-import RightBar from "../../components/RightBar/RightBar";
-import tweets from '../../data.json';
+import { apiURL } from "../../constants";
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const Notifications = () => {
+
+    const { user } = useAuthContext();
+    const [notifications, setNotifications] = useState([]);
+
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            const response = await fetch(apiURL + '/notifications', {
+                headers: { 'Authorization': `Bearer ${user.token}` },
+            })
+            const json = await response.json()
+
+            if (response.ok) {
+                setNotifications(json)
+            }
+        }
+
+        if (user) {
+            fetchNotifications()
+        }
+    }, [user])
+
     return (
-
-            <div className="notifications fade-in">
+        <div className="notifications fade-in">
             <div className="title"><h2>Notifications</h2></div>
-            <Notification/>
-            <Notification/>
-            <Notification/>
-            <Notification/>
-            <Notification/>
-            <Notification/>
-            <Notification/>
-            <Notification/>
-            <Notification/>
+            {notifications && notifications.map((notification) => (
+                <Notification key={notification._id} notification={notification} />
+            ))}
         </div>
-
     );
 }
 

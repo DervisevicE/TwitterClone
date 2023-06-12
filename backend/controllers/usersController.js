@@ -1,5 +1,6 @@
 const { default: mongoose } = require('mongoose')
 const User = require('../models/userModel')
+const Notification = require('../models/notificationModel')
 const jwt = require('jsonwebtoken')
 
 const createToken = (_id) => {
@@ -160,6 +161,14 @@ const followUser = async (req, res) => {
     await user.save()
     await follow.save()
 
+    const notification = new Notification({
+        user: followId,
+        sender: id,
+        message: `${user.username} started following you.`,
+    });
+
+    await notification.save();
+
     res.status(200).json({ message: 'User followed successfully' })
 }
 
@@ -248,6 +257,7 @@ const getUserById = async (req, res) => {
     }
 }
 
+
 module.exports = {
     signupUser,
     loginUser,
@@ -259,5 +269,6 @@ module.exports = {
     followUser,
     unfollowUser,
     getRandomUsers,
-    getUserById
+    getUserById,
+
 }

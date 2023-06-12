@@ -9,6 +9,7 @@ const bookmarkRoutes = require('./routes/bookmarks')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const jwtGuard = require('./middleware/auth');
+const Notification = require('./models/notificationModel');
 
 const app = express();
 
@@ -21,6 +22,23 @@ app.use('/comments', commentRoutes)
 app.use('/likes', jwtGuard, likeRoutes)
 app.use('/reposts', repostRoutes)
 app.use('/bookmarks', jwtGuard, bookmarkRoutes)
+
+app.get('/notifications', jwtGuard, function (req, res) {
+    const id = req.user._id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such user' });
+    }
+
+    Notification.find({ user: id })
+        .sort({ createdAt: -1 })
+        .then(notifications => {
+            res.status(202).json(notifications);
+        }).catch(error => {
+            res.status(500).json({ error: 'An error occurred while fetching notifications' });
+        });
+});
+
 
 app.get('/', function (req, res) {
     res.json({ mssg: "Hello this is working" })

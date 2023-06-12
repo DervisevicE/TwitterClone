@@ -7,9 +7,8 @@
 
 .notification {
     width: auto;
-    padding: 0px 28px;
+    padding: 10px 28px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #e7e7e8;
     margin-left: calc(-250px + 32px);
@@ -22,6 +21,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px 16px;
+    padding-left: 30px;
 }
 
 .notification:hover {

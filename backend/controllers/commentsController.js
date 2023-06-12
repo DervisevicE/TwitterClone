@@ -2,6 +2,7 @@ const { default: mongoose } = require('mongoose')
 const Tweet = require('../models/tweetModel')
 const User = require('../models/userModel')
 const Comment = require('../models/commentModel')
+const Notification = require('../models/notificationModel')
 
 const createComment = async (req, res) => {
     const { content, tweet } = req.body;
@@ -20,6 +21,16 @@ const createComment = async (req, res) => {
 
         await twt.save();
 
+        const author = await User.findById(twt.author)
+        const whoCommented = await User.findById(id)
+        const notification = new Notification({
+            user: author,
+            sender: id,
+            message: `${whoCommented.username} commented on your post.`,
+        });
+
+        await notification.save();
+            
         res.status(200).json(comment);
     } catch (error) {
         res.status(400).json({ error: error.message });

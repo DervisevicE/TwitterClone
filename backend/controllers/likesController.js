@@ -2,6 +2,7 @@ const { default: mongoose } = require('mongoose')
 const Tweet = require('../models/tweetModel')
 const Like = require('../models/likeModel')
 const User = require('../models/userModel')
+const Notification = require('../models/notificationModel')
 
 const getLikes = async (req, res) => {
     const { tweetId } = req.params
@@ -42,6 +43,16 @@ const likeTweet = async (req, res) => {
 
         twt.likes.push(like._id)
         await twt.save()
+
+        const author = await User.findById(twt.author)
+        const whoLiked = await User.findById(user._id)
+        const notification = new Notification({
+            user: author,
+            sender: user._id,
+            message: `${whoLiked.username} liked your post.`,
+        });
+
+        await notification.save();
 
         res.status(200).json(like)
     } catch (error) {

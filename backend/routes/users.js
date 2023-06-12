@@ -35,4 +35,5 @@ router.get('/random', jwtGuard, getRandomUsers);
 
 router.get('/:id', jwtGuard, getUserById)
 
+
 module.exports = router
